@@ -16,6 +16,7 @@ import java.awt.Font;
 import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.TextField;
 
 public class Admin extends JFrame {
 
@@ -120,6 +121,41 @@ public class Admin extends JFrame {
 		button_5.setBackground(SystemColor.textHighlight);
 		button_5.setBounds(436, 418, 180, 40);
 		contentPane.add(button_5);
+		
+		Button button_6 = new Button("Return Books");
+		button_6.setFont(new Font("Tahoma", Font.BOLD, 16));
+		button_6.setBackground(SystemColor.textHighlight);
+		button_6.setBounds(118, 502, 180, 40);
+		contentPane.add(button_6);
+		
+		Button button_7 = new Button("Remove User");
+		button_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button_7.setFont(new Font("Tahoma", Font.BOLD, 16));
+		button_7.setBackground(SystemColor.textHighlight);
+		button_7.setBounds(436, 502, 180, 40);
+		contentPane.add(button_7);
+		
+		JSeparator separator_4 = new JSeparator();
+		separator_4.setBounds(191, 456, 1, 2);
+		contentPane.add(separator_4);
+		
+		JSeparator separator_5 = new JSeparator();
+		separator_5.setBounds(530, 456, 1, 2);
+		contentPane.add(separator_5);
+		
+		JSeparator separator_6 = new JSeparator();
+		separator_6.setBounds(175, 540, 1, 2);
+		contentPane.add(separator_6);
+		
+		JSeparator separator_7 = new JSeparator();
+		separator_7.setBounds(530, 540, 1, 2);
+		contentPane.add(separator_7);
+		
+		JSeparator separator_8 = new JSeparator();
+		separator_8.setBounds(175, 295, 1, 2);
+		contentPane.add(separator_8);
 	}
-
 }
