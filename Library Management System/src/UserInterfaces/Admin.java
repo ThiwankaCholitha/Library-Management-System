@@ -31,6 +31,7 @@ public class Admin extends JFrame {
 				try {
 					Admin frame = new Admin();
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -55,7 +56,7 @@ public class Admin extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(0, 0, 128));
+		panel.setBackground(new Color(169, 169, 169));
 		panel.setBounds(0, 0, 722, 197);
 		contentPane.add(panel);
 		panel.setLayout(null);
@@ -67,6 +68,14 @@ public class Admin extends JFrame {
 		panel.add(lblNewLabel);
 		
 		Button button = new Button("Add User");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddUser newuser = new AddUser();
+				newuser.setVisible(true);
+				newuser.setLocationRelativeTo(null);
+				setVisible(false);
+			}
+		});
 		button.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button.setBackground(SystemColor.textHighlight);
 		button.setBounds(118, 257, 180, 40);
@@ -157,5 +166,20 @@ public class Admin extends JFrame {
 		JSeparator separator_8 = new JSeparator();
 		separator_8.setBounds(175, 295, 1, 2);
 		contentPane.add(separator_8);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(30, 144, 255));
+		panel_1.setBounds(677, 509, 21, 25);
+		contentPane.add(panel_1);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(Color.BLUE);
+		panel_2.setBounds(656, 536, 15, 10);
+		contentPane.add(panel_2);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(0, 0, 128));
+		panel_3.setBounds(689, 547, 21, 33);
+		contentPane.add(panel_3);
 	}
 }

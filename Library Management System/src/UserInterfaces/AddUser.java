@@ -1,15 +1,21 @@
 package UserInterfaces;
 
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import javafx.scene.control.ComboBox;
+
 import java.awt.Color;
 import java.awt.Panel;
 import javax.swing.JTextField;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.Scrollbar;
 import javax.swing.JSeparator;
 import java.awt.ScrollPane;
@@ -19,14 +25,18 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Button;
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
 
 public class AddUser extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField textUid;
+	private JTextField textUname;
+	private JTextField textPhone;
+	private JTextField textEmail;
 
 	/**
 	 * Launch the application.
@@ -78,15 +88,15 @@ public class AddUser extends JFrame {
 		panel_3.setBounds(677, 509, 21, 25);
 		contentPane.add(panel_3);
 		
-		textField = new JTextField();
-		textField.setBounds(221, 75, 300, 33);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textUid = new JTextField();
+		textUid.setBounds(261, 75, 300, 33);
+		contentPane.add(textUid);
+		textUid.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(221, 155, 300, 33);
-		contentPane.add(textField_1);
+		textUname = new JTextField();
+		textUname.setColumns(10);
+		textUname.setBounds(262, 156, 300, 33);
+		contentPane.add(textUname);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(309, 98, 1, 2);
@@ -96,64 +106,67 @@ public class AddUser extends JFrame {
 		separator_1.setBounds(370, 186, 1, 2);
 		contentPane.add(separator_1);
 		
-		Choice choice = new Choice();
-		choice.setBounds(221, 246, 300, 116);
-		contentPane.add(choice);
+		textPhone = new JTextField();
+		textPhone.setColumns(10);
+		textPhone.setBounds(261, 318, 300, 33);
+		contentPane.add(textPhone);
 		
-		Choice choice_1 = new Choice();
-		choice_1.setBounds(221, 315, 300, 22);
-		contentPane.add(choice_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(221, 390, 300, 33);
-		contentPane.add(textField_2);
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(221, 470, 300, 33);
-		contentPane.add(textField_3);
+		textEmail = new JTextField();
+		textEmail.setColumns(10);
+		textEmail.setBounds(261, 231, 300, 33);
+		contentPane.add(textEmail);
 		
 		JLabel lblUsername = new JLabel("USERNAME :");
 		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUsername.setBounds(114, 82, 95, 16);
+		lblUsername.setBounds(155, 163, 95, 16);
 		contentPane.add(lblUsername);
 		
 		JLabel lblUserId = new JLabel("USER ID :");
 		lblUserId.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblUserId.setBounds(133, 162, 95, 16);
+		lblUserId.setBounds(173, 82, 95, 16);
 		contentPane.add(lblUserId);
-		
-		JLabel lblFaculty = new JLabel("FACULTY :");
-		lblFaculty.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblFaculty.setBounds(133, 252, 95, 16);
-		contentPane.add(lblFaculty);
-		
-		JLabel lblYear = new JLabel("YEAR :");
-		lblYear.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblYear.setBounds(155, 315, 95, 16);
-		contentPane.add(lblYear);
 		
 		JLabel lblPhoneNumber = new JLabel("PHONE NUMBER :");
 		lblPhoneNumber.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPhoneNumber.setBounds(84, 397, 114, 16);
+		lblPhoneNumber.setBounds(124, 325, 114, 16);
 		contentPane.add(lblPhoneNumber);
 		
 		JLabel lblEmail = new JLabel("Email :");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblEmail.setBounds(155, 477, 114, 16);
+		lblEmail.setBounds(195, 238, 114, 16);
 		contentPane.add(lblEmail);
 		
 		Button button = new Button("Add User");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String uId = textUid.getText();
+				String uName = textUname.getText();
+				String uEmail = textEmail.getText();
+				String uMobile = textPhone.getText();
+				
+				
+			
+			
+			}
+		});
 		button.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		button.setBackground(SystemColor.textHighlight);
-		button.setBounds(155, 536, 126, 33);
+		button.setBounds(112, 513, 126, 33);
 		contentPane.add(button);
 		
 		Button button_1 = new Button("Back");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			Admin admin = new Admin();
+			admin.setVisible(true);
+			setVisible(false);
+			admin.setLocationRelativeTo(null);
+				
+			}
+		});
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		button_1.setBackground(SystemColor.textHighlight);
-		button_1.setBounds(457, 536, 126, 33);
+		button_1.setBounds(505, 513, 126, 33);
 		contentPane.add(button_1);
 		
 		JSeparator separator_2 = new JSeparator();
@@ -187,5 +200,31 @@ public class AddUser extends JFrame {
 		JSeparator separator_9 = new JSeparator();
 		separator_9.setBounds(540, 567, 1, 2);
 		contentPane.add(separator_9);
+		
+		JLabel lblUserType = new JLabel("USER TYPE :");
+		lblUserType.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblUserType.setBounds(155, 407, 95, 16);
+		contentPane.add(lblUserType);
+		
+		JComboBox userType = new JComboBox();
+		userType.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		userType.setEditable(true);
+		userType.setForeground(Color.BLACK);
+		userType.setBackground(Color.WHITE);
+		userType.setBounds(261, 401, 300, 33);
+		contentPane.add(userType);
+		userType.addItem("Student");
+		userType.addItem("Staff");
+		
+		
+//		private static String getSelectedItem(){
+//		String x = userType.getSelectedItem().toString();
+//		
+//		return x;
+//		}
+		
+		
+		
+		
 	}
 }

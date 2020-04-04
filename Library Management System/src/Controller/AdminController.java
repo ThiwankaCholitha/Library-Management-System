@@ -27,6 +27,16 @@ public class AdminController {
         }
         return false;//---Return user object if login exist, if not return null
     }
+    
+    
+
+    	
+    	
+    	
+    	
+    	
+    	
+    
 
  /*   //----------------------------------------------------Add user------------------------------------------------------
     public boolean addUser(User user) {

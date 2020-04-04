@@ -21,6 +21,8 @@ import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import Controller.AdminController;
+
 
 
 public class Login extends JFrame {
@@ -28,6 +30,7 @@ public class Login extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtUsername;
 	private JPasswordField txtPassword;
+	
 
 	/**
 	 * Launch the application.
@@ -38,6 +41,10 @@ public class Login extends JFrame {
 				try {
 					Login frame = new Login();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
+					//Cant maximize the size of the window
+					frame.setResizable(false);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -81,14 +88,30 @@ public class Login extends JFrame {
 				String username = txtUsername.getText();
 				String password = txtPassword.getText();
 				
-				if(username.length() == 0) {
-					JOptionPane.showMessageDialog(null,"Empty Fields Detected!");
+				//Checking weather they empty or not
+//				if(username.length() == 0) {
+//					JOptionPane.showMessageDialog(null,"Empty Fields Detected!");
+//				}
+//				else if(password.length() ==0) {
+//					JOptionPane.showMessageDialog(null, "Empty Fields Detected!");
+//				}
+				
+				
+				//Declaring a variable as login to retrive the status from 
+				boolean login; 
+				login = AdminController.chkLogin(username,password) ;
+				
+				if(login==true) { 
+					
+					Admin ad1 = new Admin();
+					ad1.setLocationRelativeTo(null);
+					ad1.setVisible(true);
+					setVisible(false);
+					JOptionPane.showMessageDialog(null, "Login Sucessful");
 				}
-				else if(password.length() ==0) {
-					JOptionPane.showMessageDialog(null, "Empty Fields Detected!");
+				else {
+					JOptionPane.showMessageDialog(null, "Username or Password is incorrect");
 				}
-				boolean login = chkLogin(username,password);
-				if(login==true) {}
 				
 				
 			
