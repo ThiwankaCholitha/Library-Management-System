@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Classes.User;
+import Controller.AdminController;
 import javafx.scene.control.ComboBox;
 
 import java.awt.Color;
@@ -29,6 +31,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
+import java.awt.Window.Type;
 
 public class AddUser extends JFrame {
 
@@ -47,6 +50,7 @@ public class AddUser extends JFrame {
 				try {
 					AddUser frame = new AddUser();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -89,11 +93,13 @@ public class AddUser extends JFrame {
 		contentPane.add(panel_3);
 		
 		textUid = new JTextField();
+		textUid.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textUid.setBounds(261, 75, 300, 33);
 		contentPane.add(textUid);
 		textUid.setColumns(10);
 		
 		textUname = new JTextField();
+		textUname.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textUname.setColumns(10);
 		textUname.setBounds(262, 156, 300, 33);
 		contentPane.add(textUname);
@@ -107,11 +113,13 @@ public class AddUser extends JFrame {
 		contentPane.add(separator_1);
 		
 		textPhone = new JTextField();
+		textPhone.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textPhone.setColumns(10);
 		textPhone.setBounds(261, 318, 300, 33);
 		contentPane.add(textPhone);
 		
 		textEmail = new JTextField();
+		textEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textEmail.setColumns(10);
 		textEmail.setBounds(261, 231, 300, 33);
 		contentPane.add(textEmail);
@@ -136,18 +144,39 @@ public class AddUser extends JFrame {
 		lblEmail.setBounds(195, 238, 114, 16);
 		contentPane.add(lblEmail);
 		
+		JComboBox userType = new JComboBox();
+		userType.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		userType.setForeground(Color.BLACK);
+		userType.setBackground(Color.WHITE);
+		userType.setBounds(261, 401, 300, 33);
+		contentPane.add(userType);
+		
+		userType.addItem("Student");
+		userType.addItem("Staff");
+		
+		
 		Button button = new Button("Add User");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				//Getting the eneterd information from the admin
 				String uId = textUid.getText();
 				String uName = textUname.getText();
 				String uEmail = textEmail.getText();
 				String uMobile = textPhone.getText();
+				String utype = userType.getSelectedItem().toString();
 				
+				//Creating the user type object with overloaded constructor
+				User newUser = new User(uId,uName,uEmail,uMobile,utype);
+				AdminController.addUser(newUser);
+				JOptionPane.showMessageDialog(null, "User Sucessfully added ");
 				
-			
-			
-			}
+				//setting the user details to null
+				textUid.setText(null);
+				textUname.setText(null);
+				textEmail.setText(null);
+				textPhone.setText(null);
+				}
 		});
 		button.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		button.setBackground(SystemColor.textHighlight);
@@ -206,22 +235,9 @@ public class AddUser extends JFrame {
 		lblUserType.setBounds(155, 407, 95, 16);
 		contentPane.add(lblUserType);
 		
-		JComboBox userType = new JComboBox();
-		userType.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		userType.setEditable(true);
-		userType.setForeground(Color.BLACK);
-		userType.setBackground(Color.WHITE);
-		userType.setBounds(261, 401, 300, 33);
-		contentPane.add(userType);
-		userType.addItem("Student");
-		userType.addItem("Staff");
 		
 		
-//		private static String getSelectedItem(){
-//		String x = userType.getSelectedItem().toString();
-//		
-//		return x;
-//		}
+		
 		
 		
 		

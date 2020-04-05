@@ -106,6 +106,7 @@ public class Login extends JFrame {
 					Admin ad1 = new Admin();
 					ad1.setLocationRelativeTo(null);
 					ad1.setVisible(true);
+					
 					setVisible(false);
 					JOptionPane.showMessageDialog(null, "Login Sucessful");
 				}

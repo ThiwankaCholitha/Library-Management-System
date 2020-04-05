@@ -6,6 +6,8 @@ public class User {
 	private String userEmail;
 	private String mobilenumber;
 	private String type;
+	
+	
 	public String getUserName() {
 		return userName;
 	}

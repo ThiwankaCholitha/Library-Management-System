@@ -17,6 +17,8 @@ import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.TextField;
+import javax.swing.JTextPane;
+import javax.swing.JTextArea;
 
 public class Admin extends JFrame {
 
@@ -31,6 +33,7 @@ public class Admin extends JFrame {
 				try {
 					Admin frame = new Admin();
 					frame.setVisible(true);
+					frame.setResizable(false);
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -90,6 +93,10 @@ public class Admin extends JFrame {
 		Button button_2 = new Button("Add Books");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				AddBook addbook = new AddBook();
+				setVisible(false);
+				addbook.setVisible(true);
+				addbook.setLocationRelativeTo(null);
 			}
 		});
 		button_2.setFont(new Font("Tahoma", Font.BOLD, 16));
