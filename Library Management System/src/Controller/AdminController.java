@@ -78,20 +78,20 @@ public class AdminController {
     }
     
     
-    public ArrayList<String[]> getUserDetails() {
+    public static ArrayList<String[]> getUserDetails() {
         ArrayList<String[]> user = new ArrayList<>();//---Creates an array object (ArrayList) to store multiple objects
         try {
             Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
-            PreparedStatement preparedStatement = connection.prepareStatement("select batchId,name from batch");//---Prepare sql as a java object
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from client");//---Prepare sql as a java object
             ResultSet rst = preparedStatement.executeQuery();//---Execute sql and store result
             while (rst.next()) {//---Navigate pointer to result rows until it ends
                 String[] users = new String[6];//---Creates a batch object
-                users[0]= rst.getString(0);//---Set table row data to batch model object
-                users[1]= rst.getString(1);//---Set table row data to batch model object
-                users[2]= rst.getString(2);//---Set table row data to batch model object
-                users[3]= rst.getString(3);//---Set table row data to batch model object
-                users[4]= rst.getString(4);//---Set table row data to batch model object
-                users[5] = rst.getString(5);
+                users[0]= rst.getString(1);//---Set table row data to batch model object
+                users[1]= rst.getString(2);//---Set table row data to batch model object
+                users[2]= rst.getString(3);//---Set table row data to batch model object
+                users[3]= rst.getString(4);//---Set table row data to batch model object
+                users[4]= rst.getString(5);//---Set table row data to batch model object
+                users[5] = rst.getString(6);
                 
                 
                 

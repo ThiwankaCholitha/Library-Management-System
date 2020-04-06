@@ -8,9 +8,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import Controller.AdminController;
+
 import java.awt.Color;
 import javax.swing.JTable;
 import java.awt.Panel;
+import java.util.ArrayList;
 
 public class ViewUser extends JFrame {
 
@@ -49,7 +52,20 @@ public class ViewUser extends JFrame {
 		contentPane.setLayout(null);
 		
 		table = new JTable();
-		//default table model ek getModel
+		//Table Creation
+				Object[]columns = {"UserId","UserName","Email","Mobile","Fine","BookId"};
+				DefaultTableModel user;
+				ArrayList<String[]>users = new ArrayList<>();
+				
+				
+				users = AdminController.getUserDetails();
+				user = (DefaultTableModel) table.getModel();
+				for(int i=0; i<users.size();i++) {
+					
+					user.addRow(users.get(i));
+				
+				}
+		
 		
 		table.setBounds(12, 95, 698, 390);
 		contentPane.add(table);
@@ -75,12 +91,7 @@ public class ViewUser extends JFrame {
 		contentPane.add(panel_3);
 		
 		
-		//Table Creation
-		Object[]columns = {"UserId","UserName","Email","Mobile","Fine","BookId"};
-		model = new DefaultTableModel();
-		model.setColumnIdentifiers(columns);
-		table.setModel(model);
-		Object []row = new Object[5];
+		
 
 	}
 }
