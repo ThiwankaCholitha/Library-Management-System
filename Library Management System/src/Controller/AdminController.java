@@ -93,11 +93,6 @@ public class AdminController {
                 users[4]= rst.getString(5);//---Set table row data to batch model object
                 users[5] = rst.getString(6);
                 
-                
-                
-                
-                
-                
                 user.add(users);
                 
             }
