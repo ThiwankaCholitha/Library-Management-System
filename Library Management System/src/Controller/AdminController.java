@@ -78,7 +78,7 @@ public class AdminController {
     }
     
     
-    public ArrayList<String[]> getIntakes() {
+    public ArrayList<String[]> getUserDetails() {
         ArrayList<String[]> user = new ArrayList<>();//---Creates an array object (ArrayList) to store multiple objects
         try {
             Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection

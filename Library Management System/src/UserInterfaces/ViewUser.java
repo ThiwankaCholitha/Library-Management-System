@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.Color;
 import javax.swing.JTable;
 import java.awt.Panel;
@@ -14,6 +16,7 @@ public class ViewUser extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	private DefaultTableModel model;
 
 	/**
 	 * Launch the application.
@@ -47,7 +50,7 @@ public class ViewUser extends JFrame {
 		
 		table = new JTable();
 		//default table model ek getModel
-		//
+		
 		table.setBounds(12, 95, 698, 390);
 		contentPane.add(table);
 		
@@ -70,5 +73,14 @@ public class ViewUser extends JFrame {
 		panel_3.setBackground(new Color(0, 0, 128));
 		panel_3.setBounds(689, 547, 21, 33);
 		contentPane.add(panel_3);
+		
+		
+		//Table Creation
+		Object[]columns = {"UserId","UserName","Email","Mobile","Fine","BookId"};
+		model = new DefaultTableModel();
+		model.setColumnIdentifiers(columns);
+		table.setModel(model);
+		Object []row = new Object[5];
+
 	}
 }
