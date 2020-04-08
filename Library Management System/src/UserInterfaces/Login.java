@@ -68,7 +68,7 @@ public class Login extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 346, 383);
+		panel.setBounds(0, 0, 346, 431);
 		panel.setBackground(new Color(0, 0, 128));
 		panel.setForeground(Color.LIGHT_GRAY);
 		contentPane.add(panel);
@@ -76,7 +76,7 @@ public class Login extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/Images/Main.jpg")));
-		lblNewLabel.setBounds(-235, -62, 581, 477);
+		lblNewLabel.setBounds(-235, -62, 581, 493);
 		lblNewLabel.setForeground(Color.LIGHT_GRAY);
 		panel.add(lblNewLabel);
 		

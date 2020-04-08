@@ -16,11 +16,20 @@ import java.util.ArrayList;
 
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 public class ViewUser extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
+	private JTextField txt1;
+	private JTextField txt2;
+	private JTextField txt3;
+	private JTextField txt4;
+	private JTextField txt5;
 
 	/**
 	 * Launch the application.
@@ -73,32 +82,64 @@ public class ViewUser extends JFrame {
 		panel_3.setBounds(656, 536, 15, 10);
 		contentPane.add(panel_3);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(12, 59, 700, 447);
-		contentPane.add(scrollPane);
+		JButton butxt = new JButton("load");
+		butxt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String[] usersD = new String[5];
+				
+		usersD = AdminController.getUserAll();
 		
-		table = new JTable();
+		txt1.setText(usersD[0]);
+		txt2.setText(usersD[1]);
+		txt3.setText(usersD[2]);
+		txt4.setText(usersD[3]);
+		txt5.setText(usersD[4]);
+				
+				
+				
+				
+				
+				
+			
+			}
+		});
+		butxt.setBounds(326, 489, 279, 60);
+		contentPane.add(butxt);
+		
+		txt1 = new JTextField();
+		txt1.setBounds(68, 78, 520, 60);
+		contentPane.add(txt1);
+		txt1.setColumns(10);
+		
+		txt2 = new JTextField();
+		txt2.setBounds(66, 164, 236, 33);
+		contentPane.add(txt2);
+		txt2.setColumns(10);
+		
+		txt3 = new JTextField();
+		txt3.setColumns(10);
+		txt3.setBounds(68, 232, 236, 33);
+		contentPane.add(txt3);
+		
+		txt4 = new JTextField();
+		txt4.setColumns(10);
+		txt4.setBounds(66, 307, 236, 33);
+		contentPane.add(txt4);
+		
+		txt5 = new JTextField();
+		txt5.setColumns(10);
+		txt5.setBounds(66, 378, 236, 33);
+		contentPane.add(txt5);
 		 
+	
 		DefaultTableModel dtm = new DefaultTableModel(0, 0);
 
 		// add header of the table
-		String header[] = new String[] { "User Id", "User Name","Email","Phone","Fine","Book Id"};
-		dtm.setColumnIdentifiers(header);
-		table.setModel(dtm);
-		scrollPane.getViewport().setBackground(Color.WHITE);
-		table.getTableHeader().setBackground(Color.WHITE);
-		table.setForeground(Color.BLACK);
-		scrollPane.setViewportView(table);
 		
 		
-		ArrayList<String[]>users = new ArrayList<>();
 		
-		for(int i=0; i<users.size(); i++) {
-			
-			users = AdminController.getUserDetails();
-			dtm =(DefaultTableModel) table.getModel();
-			dtm.addRow(users.get(i));
 		
 		}
 	}
-}
+

@@ -104,6 +104,66 @@ public class AdminController {
     
     
     
+    public static String getone(){
+    	String username = null;
+    	 try {
+             Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
+             PreparedStatement preparedStatement = connection.prepareStatement
+            ("select ClientName "+
+             "from client "+ 
+             "where ClientId="+"'IT19206806'");//---Prepare sql as a java object
+             ResultSet rst = preparedStatement.executeQuery();//---Execute sql and store result
+             {//---Navigate pointer to result rows until it ends
+                
+            	 if(rst.next()) {
+               username = rst.getString(1);
+            	 }
+            	 
+                 
+                 
+             }
+         } catch (SQLException e) {//--Catch if any sql exception occurred
+             e.printStackTrace();
+         }
+    	 
+		return username;//---Return batches array object with a length > 0 if batches exists, if not array object returns with a length = 0
+     }
+    
+    
+    
+    public static String[] getUserAll(){
+    	String [] user = new String[5];
+    	 try {
+             Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
+             PreparedStatement preparedStatement = connection.prepareStatement
+            ("select * "+
+             "from client");//---Prepare sql as a java object
+             ResultSet rst = preparedStatement.executeQuery();//---Execute sql and store result
+             {//---Navigate pointer to result rows until it ends
+                
+            	 if(rst.next()) {
+               user[0] = rst.getString(1);
+               user[1] = rst.getString(2);
+               user[2] = rst.getString(3);
+               user[3] = rst.getString(4);
+               user[4] = rst.getString(5);
+            	 }
+            	 
+                 
+                 
+             }
+         } catch (SQLException e) {//--Catch if any sql exception occurred
+             e.printStackTrace();
+         }
+    	 
+		return user;//---Return batches array object with a length > 0 if batches exists, if not array object returns with a length = 0
+     }
+    
+    
+    
+    
+    
+    
     
     
     

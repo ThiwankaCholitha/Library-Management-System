@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.TextField;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
+import java.awt.Panel;
 
 public class Admin extends JFrame {
 
@@ -58,18 +59,6 @@ public class Admin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(169, 169, 169));
-		panel.setBounds(0, 0, 722, 197);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(0, -3, 723, 192);
-		lblNewLabel.setIcon(new ImageIcon(Admin.class.getResource("/Images/Admin 1.jpg")));
-		lblNewLabel.setForeground(new Color(0, 0, 128));
-		panel.add(lblNewLabel);
-		
 		Button button = new Button("Add User");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -81,13 +70,13 @@ public class Admin extends JFrame {
 		});
 		button.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button.setBackground(SystemColor.textHighlight);
-		button.setBounds(118, 257, 180, 40);
+		button.setBounds(119, 193, 180, 40);
 		contentPane.add(button);
 		
 		Button button_1 = new Button("View Users");
 		button_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button_1.setBackground(SystemColor.textHighlight);
-		button_1.setBounds(436, 257, 180, 40);
+		button_1.setBounds(437, 193, 180, 40);
 		contentPane.add(button_1);
 		
 		Button button_2 = new Button("Add Books");
@@ -101,47 +90,47 @@ public class Admin extends JFrame {
 		});
 		button_2.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button_2.setBackground(SystemColor.textHighlight);
-		button_2.setBounds(118, 335, 180, 40);
+		button_2.setBounds(119, 271, 180, 40);
 		contentPane.add(button_2);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(160, 278, 1, 2);
+		separator.setBounds(161, 214, 1, 2);
 		contentPane.add(separator);
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(553, 295, 1, 2);
+		separator_1.setBounds(554, 231, 1, 2);
 		contentPane.add(separator_1);
 		
 		Button button_3 = new Button("View Books");
 		button_3.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button_3.setBackground(SystemColor.textHighlight);
-		button_3.setBounds(436, 335, 180, 40);
+		button_3.setBounds(437, 271, 180, 40);
 		contentPane.add(button_3);
 		
 		JSeparator separator_2 = new JSeparator();
-		separator_2.setBounds(511, 373, 1, 2);
+		separator_2.setBounds(512, 309, 1, 2);
 		contentPane.add(separator_2);
 		
 		JSeparator separator_3 = new JSeparator();
-		separator_3.setBounds(175, 390, 1, 2);
+		separator_3.setBounds(176, 326, 1, 2);
 		contentPane.add(separator_3);
 		
 		Button button_4 = new Button("Issue Books");
 		button_4.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button_4.setBackground(SystemColor.textHighlight);
-		button_4.setBounds(118, 418, 180, 40);
+		button_4.setBounds(119, 354, 180, 40);
 		contentPane.add(button_4);
 		
 		Button button_5 = new Button("View Issued Books");
 		button_5.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button_5.setBackground(SystemColor.textHighlight);
-		button_5.setBounds(436, 418, 180, 40);
+		button_5.setBounds(437, 354, 180, 40);
 		contentPane.add(button_5);
 		
 		Button button_6 = new Button("Return Books");
 		button_6.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button_6.setBackground(SystemColor.textHighlight);
-		button_6.setBounds(118, 502, 180, 40);
+		button_6.setBounds(119, 438, 180, 40);
 		contentPane.add(button_6);
 		
 		Button button_7 = new Button("Remove User");
@@ -151,27 +140,27 @@ public class Admin extends JFrame {
 		});
 		button_7.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button_7.setBackground(SystemColor.textHighlight);
-		button_7.setBounds(436, 502, 180, 40);
+		button_7.setBounds(437, 438, 180, 40);
 		contentPane.add(button_7);
 		
 		JSeparator separator_4 = new JSeparator();
-		separator_4.setBounds(191, 456, 1, 2);
+		separator_4.setBounds(192, 392, 1, 2);
 		contentPane.add(separator_4);
 		
 		JSeparator separator_5 = new JSeparator();
-		separator_5.setBounds(530, 456, 1, 2);
+		separator_5.setBounds(531, 392, 1, 2);
 		contentPane.add(separator_5);
 		
 		JSeparator separator_6 = new JSeparator();
-		separator_6.setBounds(175, 540, 1, 2);
+		separator_6.setBounds(176, 476, 1, 2);
 		contentPane.add(separator_6);
 		
 		JSeparator separator_7 = new JSeparator();
-		separator_7.setBounds(530, 540, 1, 2);
+		separator_7.setBounds(531, 476, 1, 2);
 		contentPane.add(separator_7);
 		
 		JSeparator separator_8 = new JSeparator();
-		separator_8.setBounds(175, 295, 1, 2);
+		separator_8.setBounds(176, 231, 1, 2);
 		contentPane.add(separator_8);
 		
 		JPanel panel_1 = new JPanel();
@@ -188,5 +177,41 @@ public class Admin extends JFrame {
 		panel_3.setBackground(new Color(0, 0, 128));
 		panel_3.setBounds(689, 547, 21, 33);
 		contentPane.add(panel_3);
+		
+		Panel panel = new Panel();
+		panel.setBackground(new Color(230, 230, 250));
+		panel.setBounds(0, 0, 733, 187);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon(Admin.class.getResource("/Images/Admin 1.jpg")));
+		lblNewLabel.setBounds(12, 0, 709, 187);
+		lblNewLabel.setForeground(new Color(135, 206, 250));
+		panel.add(lblNewLabel);
+		
+		Button button_8 = new Button("Add Admin");
+		button_8.setFont(new Font("Tahoma", Font.BOLD, 16));
+		button_8.setBackground(SystemColor.textHighlight);
+		button_8.setBounds(119, 522, 180, 40);
+		contentPane.add(button_8);
+		
+		Button button_9 = new Button("Log Out");
+		button_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login login1 = new Login();
+				login1.setVisible(true);
+				login1.setLocationRelativeTo(null);
+				//Cant maximize the size of the window
+				login1.setResizable(false);
+				setVisible(false);
+				
+			
+			}
+		});
+		button_9.setFont(new Font("Tahoma", Font.BOLD, 16));
+		button_9.setBackground(SystemColor.textHighlight);
+		button_9.setBounds(437, 522, 180, 40);
+		contentPane.add(button_9);
 	}
 }
