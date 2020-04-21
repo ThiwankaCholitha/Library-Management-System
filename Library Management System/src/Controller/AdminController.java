@@ -78,75 +78,28 @@ public class AdminController {
     }
     
     
-    public static ArrayList<String[]> getUserDetails() {
-        ArrayList<String[]> user = new ArrayList<>();//---Creates an array object (ArrayList) to store multiple objects
-        try {
-            Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
-            PreparedStatement preparedStatement = connection.prepareStatement("select * from client");//---Prepare sql as a java object
-            ResultSet rst = preparedStatement.executeQuery();//---Execute sql and store result
-            while (rst.next()) {//---Navigate pointer to result rows until it ends
-                String[] users = new String[6];//---Creates a batch object
-                users[0]= rst.getString(1);//---Set table row data to batch model object
-                users[1]= rst.getString(2);//---Set table row data to batch model object
-                users[2]= rst.getString(3);//---Set table row data to batch model object
-                users[3]= rst.getString(4);//---Set table row data to batch model object
-                users[4]= rst.getString(5);//---Set table row data to batch model object
-                users[5] = rst.getString(6);
-                
-                user.add(users);
-                
-            }
-        } catch (SQLException e) {//--Catch if any sql exception occurred
-            e.printStackTrace();
-        }
-        return user;//---Return batches array object with a length > 0 if batches exists, if not array object returns with a length = 0
-    }
+    //--------------------------------------------------------Getting exsisting users in to the table --------------------------------------------------
     
-    
-    
-    public static String getone(){
-    	String username = null;
+    public static ArrayList<String[]> getUserList(){
+    	ArrayList <String[]> users = new ArrayList<>();
+    	
     	 try {
              Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
              PreparedStatement preparedStatement = connection.prepareStatement
-            ("select ClientName "+
-             "from client "+ 
-             "where ClientId="+"'IT19206806'");//---Prepare sql as a java object
-             ResultSet rst = preparedStatement.executeQuery();//---Execute sql and store result
-             {//---Navigate pointer to result rows until it ends
-                
-            	 if(rst.next()) {
-               username = rst.getString(1);
-            	 }
-            	 
-                 
-                 
-             }
-         } catch (SQLException e) {//--Catch if any sql exception occurred
-             e.printStackTrace();
-         }
-    	 
-		return username;//---Return batches array object with a length > 0 if batches exists, if not array object returns with a length = 0
-     }
-    
-    
-    
-    public static String[] getUserAll(){
-    	String [] user = new String[5];
-    	 try {
-             Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
-             PreparedStatement preparedStatement = connection.prepareStatement
-            ("select * "+
+            ("select ClientId,ClientName,Email,PhoneNumber,UserType "+
              "from client");//---Prepare sql as a java object
              ResultSet rst = preparedStatement.executeQuery();//---Execute sql and store result
              {//---Navigate pointer to result rows until it ends
                 
-            	 if(rst.next()) {
+           while (rst.next()) {
+        	   String [] user = new String[5];
                user[0] = rst.getString(1);
                user[1] = rst.getString(2);
                user[2] = rst.getString(3);
                user[3] = rst.getString(4);
                user[4] = rst.getString(5);
+               
+               users.add(user);
             	 }
             	 
                  
@@ -156,9 +109,27 @@ public class AdminController {
              e.printStackTrace();
          }
     	 
-		return user;//---Return batches array object with a length > 0 if batches exists, if not array object returns with a length = 0
+		return users;//---Return batches array object with a length > 0 if batches exists, if not array object returns with a length = 0
      }
     
+    
+    //--------------------------------------Removing a user from the database---------------------------------------
+    public static void removeUser(User u1) {
+    	try {
+            Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
+            PreparedStatement preparedStatement = connection.prepareStatement("delete from client "+
+            																	"Where clientId =?");
+           
+            preparedStatement.setObject(1,u1.getUserId());
+            preparedStatement.executeUpdate();
+            
+            //while (rst.next()) {}
+            } catch (SQLException e) {//--Catch if any sql exception occurred
+            e.printStackTrace();
+        }
+    	
+    	
+    }
     
     
     

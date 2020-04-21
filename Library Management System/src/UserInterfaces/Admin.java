@@ -20,6 +20,7 @@ import java.awt.TextField;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import java.awt.Panel;
+import java.awt.Window.Type;
 
 public class Admin extends JFrame {
 
@@ -47,6 +48,7 @@ public class Admin extends JFrame {
 	 * Create the frame.
 	 */
 	public Admin() {
+		setType(Type.UTILITY);
 		setTitle("Admin ");
 		setForeground(Color.WHITE);
 		setBackground(Color.WHITE);
@@ -74,6 +76,15 @@ public class Admin extends JFrame {
 		contentPane.add(button);
 		
 		Button button_1 = new Button("View Users");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ViewUser viewuser = new ViewUser();
+				viewuser.setVisible(true);
+				viewuser.setLocationRelativeTo(null);
+				setVisible(false);
+				
+				}
+		});
 		button_1.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button_1.setBackground(SystemColor.textHighlight);
 		button_1.setBounds(437, 193, 180, 40);
@@ -186,7 +197,7 @@ public class Admin extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(Admin.class.getResource("/Images/Admin 1.jpg")));
-		lblNewLabel.setBounds(12, 0, 709, 187);
+		lblNewLabel.setBounds(12, 0, 710, 187);
 		lblNewLabel.setForeground(new Color(135, 206, 250));
 		panel.add(lblNewLabel);
 		
@@ -200,11 +211,13 @@ public class Admin extends JFrame {
 		button_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login login1 = new Login();
+				setVisible(false);
 				login1.setVisible(true);
 				login1.setLocationRelativeTo(null);
 				//Cant maximize the size of the window
-				login1.setResizable(false);
-				setVisible(false);
+				
+//				login1.setResizable(false);
+//				setVisible(false);
 				
 			
 			}

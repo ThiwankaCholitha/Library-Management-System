@@ -62,6 +62,7 @@ public class AddUser extends JFrame {
 	 * Create the frame.
 	 */
 	public AddUser() {
+		setType(Type.UTILITY);
 		setTitle("Add User");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 740, 640);

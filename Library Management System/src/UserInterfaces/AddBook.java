@@ -54,6 +54,8 @@ public class AddBook extends JFrame {
 	 * Create the frame.
 	 */
 	public AddBook() {
+		setTitle("Add Book");
+		setType(Type.UTILITY);
 		setForeground(Color.WHITE);
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

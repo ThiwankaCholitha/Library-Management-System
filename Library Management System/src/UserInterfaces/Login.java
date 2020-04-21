@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import Controller.AdminController;
+import java.awt.Window.Type;
 
 
 
@@ -41,7 +42,7 @@ public class Login extends JFrame {
 				try {
 					Login frame = new Login();
 					frame.setVisible(true);
-					frame.setLocationRelativeTo(null);
+					
 					//Cant maximize the size of the window
 					frame.setResizable(false);
 					
@@ -56,7 +57,8 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
-		setTitle("Login Window");
+		setType(Type.UTILITY);
+		setTitle("Login");
 		setForeground(Color.WHITE);
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

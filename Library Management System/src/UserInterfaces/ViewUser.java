@@ -6,9 +6,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import Controller.AdminController;
+import javafx.scene.text.Font;
 
 import java.awt.Color;
 import java.awt.Panel;
@@ -17,19 +20,22 @@ import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import java.awt.Button;
+import java.awt.SystemColor;
+import java.awt.Window.Type;
+import java.awt.TextField;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 public class ViewUser extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txt1;
-	private JTextField txt2;
-	private JTextField txt3;
-	private JTextField txt4;
-	private JTextField txt5;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -40,6 +46,8 @@ public class ViewUser extends JFrame {
 				try {
 					ViewUser frame = new ViewUser();
 					frame.setVisible(true);
+					frame.setResizable(false);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -51,6 +59,8 @@ public class ViewUser extends JFrame {
 	 * Create the frame.
 	 */
 	public ViewUser() {
+		setType(Type.UTILITY);
+		setTitle("View User");
 		setForeground(Color.WHITE);
 		setBackground(Color.WHITE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -63,83 +73,140 @@ public class ViewUser extends JFrame {
 		contentPane.setLayout(null);
 		
 		Panel panel = new Panel();
+		panel.setBounds(0, 0, 746, 43);
 		panel.setBackground(new Color(0, 0, 128));
-		panel.setBounds(0, 0, 722, 43);
 		contentPane.add(panel);
 		
+		TextField textField = new TextField();
+		textField.setBounds(56, 71, 204, 33);
+		textField.setForeground(Color.BLACK);
+		textField.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14));
+		contentPane.add(textField);
+		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(0, 0, 128));
 		panel_1.setBounds(689, 547, 21, 33);
+		panel_1.setBackground(new Color(0, 0, 128));
 		contentPane.add(panel_1);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(new Color(30, 144, 255));
 		panel_2.setBounds(677, 509, 21, 25);
+		panel_2.setBackground(new Color(30, 144, 255));
 		contentPane.add(panel_2);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(Color.BLUE);
 		panel_3.setBounds(656, 536, 15, 10);
+		panel_3.setBackground(Color.BLUE);
 		contentPane.add(panel_3);
 		
-		JButton butxt = new JButton("load");
-		butxt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				String[] usersD = new String[5];
-				
-		usersD = AdminController.getUserAll();
 		
-		txt1.setText(usersD[0]);
-		txt2.setText(usersD[1]);
-		txt3.setText(usersD[2]);
-		txt4.setText(usersD[3]);
-		txt5.setText(usersD[4]);
-				
-				
-				
-				
-				
-				
-			
-			}
-		});
-		butxt.setBounds(326, 489, 279, 60);
-		contentPane.add(butxt);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 131, 698, 361);
+		contentPane.add(scrollPane);
+		scrollPane.setOpaque(false);
+		scrollPane.getViewport().setOpaque(false);
+		scrollPane.setBorder(BorderFactory.createEmptyBorder());
 		
-		txt1 = new JTextField();
-		txt1.setBounds(68, 78, 520, 60);
-		contentPane.add(txt1);
-		txt1.setColumns(10);
 		
-		txt2 = new JTextField();
-		txt2.setBounds(66, 164, 236, 33);
-		contentPane.add(txt2);
-		txt2.setColumns(10);
-		
-		txt3 = new JTextField();
-		txt3.setColumns(10);
-		txt3.setBounds(68, 232, 236, 33);
-		contentPane.add(txt3);
-		
-		txt4 = new JTextField();
-		txt4.setColumns(10);
-		txt4.setBounds(66, 307, 236, 33);
-		contentPane.add(txt4);
-		
-		txt5 = new JTextField();
-		txt5.setColumns(10);
-		txt5.setBounds(66, 378, 236, 33);
-		contentPane.add(txt5);
-		 
+		//------------------------------------------Creation of the Jtable ------------------------------------------------------------------------
+		table = new JTable();
 	
-		DefaultTableModel dtm = new DefaultTableModel(0, 0);
+		
+		//Setting the scrollpane to the table.
+		scrollPane.setViewportView(table);
+		
+		//Setting the table properties.
+		table.getTableHeader().setResizingAllowed(false);
+		table.getTableHeader().setReorderingAllowed(false);
+		table.setBackground(Color.white);
+		table.getTableHeader().setBackground(Color.white);
+		table.getTableHeader().setBackground(Color.decode("#87cefa"));
+		
+		
+		//Creating the default table model to put data.
+		 DefaultTableModel dtm = new DefaultTableModel(0, 0);
+	
 
-		// add header of the table
+		// adding header of the table
+		String header[] = new String[] { "UserId", "User Name", "Email",
+		      "Phone","User Type" };
+	
+		// add header to the table model     
+		 dtm.setColumnIdentifiers(header);
+		    table.setModel(dtm);
+		    table.setEnabled(false);
 		
-		
-		
-		
-		}
+		 //Setting the colums accoring to the neeeded size.
+		    table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		    
+		    Button button = new Button("Back");
+		    button.setBounds(80, 494, 180, 40);
+		    button.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14));
+		    button.setBackground(SystemColor.textHighlight);
+		    button.addActionListener(new ActionListener() {
+		    	public void actionPerformed(ActionEvent e) {
+		    		setVisible(false);
+		    		Admin admin = new Admin();
+		    		admin.setVisible(true);
+		    		admin.setLocationRelativeTo(null);
+		    		admin.setResizable(false);
+		    		
+		    	}
+		    });
+		    contentPane.add(button);
+		    
+		    Button button_1 = new Button("Remove User");
+		    button_1.setBounds(456, 494, 180, 40);
+		    button_1.addActionListener(new ActionListener() {
+		    	public void actionPerformed(ActionEvent e) {
+		    		
+		    		RemoveUser removeUser = new RemoveUser();
+		    		removeUser.setLocationRelativeTo(null);
+		    		removeUser.setVisible(true);
+		    		setVisible(false);
+		    	}
+		    });
+		    button_1.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14));
+		    button_1.setBackground(SystemColor.textHighlight);
+		    contentPane.add(button_1);
+		    
+		    JPanel panel_4 = new JPanel();
+		    panel_4.setBackground(Color.WHITE);
+		    panel_4.setBounds(-11, 49, 80, 69);
+		    contentPane.add(panel_4);
+		    panel_4.setLayout(null);
+		    
+		    JLabel lblNewLabel = new JLabel("New label");
+		    lblNewLabel.setForeground(Color.WHITE);
+		    lblNewLabel.setBounds(12, 13, 112, 49);
+		    lblNewLabel.setIcon(new ImageIcon(ViewUser.class.getResource("/Images/search (2).png")));
+		    panel_4.add(lblNewLabel);
+		    
+		    Button button_2 = new Button("Search");
+		    button_2.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14));
+		    button_2.setBackground(new Color(0, 0, 128));
+		    button_2.setBounds(266, 71, 79, 29);
+		    contentPane.add(button_2);
+		    table.getColumnModel().getColumn(0).setPreferredWidth(120);
+		    table.getColumnModel().getColumn(1).setPreferredWidth(180);
+		    table.getColumnModel().getColumn(2).setPreferredWidth(160);
+		    table.getColumnModel().getColumn(3).setPreferredWidth(162);
+		 
+		    
+	
+//-------------------------------Calling the AdminController.getUserdetails() to an Array List--------------------------------------------------------
+		    
+		    //Creating the Array List Which has a String[]
+		   ArrayList<String[]> user = null;
+	
+		   //Calling the method
+		    user = AdminController.getUserList();
+		    
+		    //iterating via a loop to get the last data row of the data table.
+		    for(int i=0; i<user.size(); i++) {
+		    	dtm.addRow(user.get(i));
+
+		    }
+	
 	}
+}
 
