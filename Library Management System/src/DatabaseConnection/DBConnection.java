@@ -12,8 +12,8 @@ public class DBConnection {
 
     private DBConnection() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");//--Load JDBC driver from library(mysql connector)
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/library", "root", "");//--Establish the database connection via db url, db username and db password
+            Class.forName("com.mysql.cj.jdbc.Driver");//--Load JDBC driver from library(mysql connector)
+            connection = DriverManager.getConnection("jdbc:mysql://localhost/LibraryManagement?useSSL=false", "root", "mysql");//--Establish the database connection via db url, db username and db password
         } catch (SQLException e) {//--Catch if any sql exception occurred
             e.printStackTrace();
         } catch (ClassNotFoundException e) {//--Catch if driver is not loaded or cannot be found

@@ -4,11 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
-
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import Classes.Book;
+import Classes.IssueBook;
 import Classes.User;
 
 public class AdminController {
@@ -38,14 +39,13 @@ public class AdminController {
     public static void addUser(User user) {
         try {
             Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into client (clientId,clientName,Email,PhoneNumber,Fine,BookId) values (?,?,?,?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into client (clientId,clientName,Email,PhoneNumber,ClientType) values (?,?,?,?,?)");
             
             preparedStatement.setObject(1, user.getUserId());//---Set values to sql object
             preparedStatement.setObject(2, user.getUserName());//---Set values to sql object
             preparedStatement.setObject(3, user.getUserEmail());//---Set values to sql object
             preparedStatement.setObject(4, user.getMobilenumber());//---Set values to sql object
-            preparedStatement.setObject(5, 0);//---Set values to sql object
-            preparedStatement.setObject(6,null);//---Set values to sql object
+            preparedStatement.setObject(5, user.getType());
             preparedStatement.executeUpdate(); //---Execute sql and returns whether it was executed or not
           
                
@@ -62,13 +62,15 @@ public class AdminController {
     public static void addBook(Book book) {
         try {
             Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into book (BookId,ISBN,BookTitle,BorrowedDate,ReturnedDate) values (?,?,?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into book (BookId,ISBN,BookTitle,BookType,Issued,Author) values (?,?,?,?,?,?)");
             
             preparedStatement.setObject(1,book.getBookId() );//---Set values to sql object
             preparedStatement.setObject(2,book.getBookISBN());//---Set values to sql object
             preparedStatement.setObject(3,book.getBooktitle());//---Set values to sql object
-            preparedStatement.setObject(4,null);//---Set values to sql object
-            preparedStatement.setObject(5,null);//---Set values to sql object
+            preparedStatement.setObject(4, book.getBookType());
+            preparedStatement.setObject(5,0);
+            preparedStatement.setObject(6,book.getAuthor());
+            
             preparedStatement.executeUpdate(); //---Execute sql and returns whether it was executed or not
                 
         } catch (SQLException e) {//--Catch if any sql exception occurred
@@ -86,7 +88,7 @@ public class AdminController {
     	 try {
              Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
              PreparedStatement preparedStatement = connection.prepareStatement
-            ("select ClientId,ClientName,Email,PhoneNumber,UserType "+
+            ("select ClientId,ClientName,Email,PhoneNumber,ClientType "+
              "from client");//---Prepare sql as a java object
              ResultSet rst = preparedStatement.executeQuery();//---Execute sql and store result
              {//---Navigate pointer to result rows until it ends
@@ -131,20 +133,114 @@ public class AdminController {
     	
     }
     
+    //------------------------------------Getting Exsisting books in the databse to issue books.-----------------------------
     
+    public static ArrayList<String> getBookList(){
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    	
+    	ArrayList<String> issuedBooks = new ArrayList<>();
+    	String bookTitle = null;
+   	 try {
+            Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
+            PreparedStatement preparedStatement = connection.prepareStatement
+           ("select BookTitle "+
+            "from book "+
+        	"where Issued = 0");//---Prepare sql as a java object
+            ResultSet rst = preparedStatement.executeQuery();//---Execute sql and store result
+            {//---Navigate pointer to result rows until it ends
+               
+          while (rst.next()) {
+       	  
+              bookTitle = rst.getString(1);
+              issuedBooks.add(bookTitle);
+            }
+        }
+        } catch (SQLException e) {//--Catch if any sql exception occurred
+            e.printStackTrace();
+        }
+   	 
+		return issuedBooks;//---Return batches array object with a length > 0 if batches exists, if not array object returns with a length = 0
+    }
 
- /*   //----------------------------------------------------Update email--------------------------------------------------
+    //----------------------------Getting book id to insert into issueBook table
+	public static IssueBook getBookID(Book b1) {
+		
+		IssueBook newbook = new IssueBook();
+		
+		  try {
+	            Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
+	            PreparedStatement preparedStatement = connection.prepareStatement("" +
+	                    "select BookId " +
+	                    "from book " +
+	                    "where BookTitle=? && Issued = 0");//---Prepare sql as a java object
+	            preparedStatement.setObject(1,b1.getBooktitle());//---Set values to sql object
+	            
+	         
+	            ResultSet rst = preparedStatement.executeQuery();//---Execute sql and store result
+	            
+	            if (rst.next()) {//---Navigate pointer to results
+	                newbook.setBookId(rst.getString(1));
+	                System.out.println(newbook.getBookId());
+	                
+	            }
+	        } catch (SQLException e) {//--Catch if any sql exception occurred
+	            e.printStackTrace();
+	        }
+	        return newbook;//---Return user object if login exist, if not return null
+	        
+	    }
+		
+
+	public static boolean insertIntoBook(IssueBook b1) throws SQLException {
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
+		Calendar cal = new GregorianCalendar();
+		
+		
+		
+	            Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
+	            PreparedStatement preparedStatement = connection.prepareStatement("insert into issuebook (ClientId,BookId,IssuedDate,ReturnedDate) values (?,?,?,?)");
+	            
+	            preparedStatement.setObject(1,b1.getClientId() );//---Set values to sql object
+	            preparedStatement.setObject(2,b1.getBookId());//---Set values to sql object
+	            
+	            //Creating a dateformat to use dates from the calendar.
+	            
+	    		
+	    		preparedStatement.setObject(3,formatter.format(cal.getTime()));
+	    		cal.add(Calendar.DAY_OF_MONTH, 14);
+	    		preparedStatement.setObject(4,formatter.format(cal.getTime()));
+	    		if(preparedStatement.executeUpdate()>0) { //---Execute sql and returns whether it was executed or not
+	    		return true;	   
+	       
+	    		}
+	    		else
+	    			return false;
+	}
+	
+	
+	public static void updatebook(IssueBook b1) {
+	try {
+		Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
+        PreparedStatement preparedStatement = connection.prepareStatement("update book "
+        		+"set Issued ='1'"
+        		+"where BookId =?"
+        		);
+        preparedStatement.setObject(1, b1.getBookId());
+        preparedStatement.executeUpdate();
+		
+		
+		
+		
+	}catch(SQLException e) {//--Catch if any sql exception occurred
+        e.printStackTrace();
+		
+	}
+	
+	}
+}
+    
+/*   //----------------------------------------------------Update email--------------------------------------------------
     public boolean updateEmail(User user) {
         try {
             Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
@@ -159,4 +255,4 @@ public class AdminController {
         }
         return false;//---Returns if update fails
     }*/
-}
+

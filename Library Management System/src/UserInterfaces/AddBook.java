@@ -32,6 +32,7 @@ public class AddBook extends JFrame {
 	private JTextField txtBookId;
 	private JTextField txtIsbn;
 	private JTextField txtBookTitle;
+	private JTextField author;
 
 	/**
 	 * Launch the application.
@@ -90,13 +91,13 @@ public class AddBook extends JFrame {
 		txtBookId = new JTextField();
 		txtBookId.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtBookId.setColumns(10);
-		txtBookId.setBounds(255, 119, 300, 33);
+		txtBookId.setBounds(259, 80, 300, 33);
 		contentPane.add(txtBookId);
 		
 		txtIsbn = new JTextField();
 		txtIsbn.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtIsbn.setColumns(10);
-		txtIsbn.setBounds(256, 200, 300, 33);
+		txtIsbn.setBounds(260, 161, 300, 33);
 		contentPane.add(txtIsbn);
 		
 		JComboBox txtBookType = new JComboBox();
@@ -104,7 +105,7 @@ public class AddBook extends JFrame {
 		txtBookType.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtBookType.setEditable(true);
 		txtBookType.setBackground(Color.WHITE);
-		txtBookType.setBounds(255, 367, 300, 33);
+		txtBookType.setBounds(259, 328, 300, 33);
 		contentPane.add(txtBookType);
 		txtBookType.addItem("I.T");
 		txtBookType.addItem("B.S");
@@ -113,28 +114,28 @@ public class AddBook extends JFrame {
 		
 		JLabel lblBookType = new JLabel("BOOK TYPE :");
 		lblBookType.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblBookType.setBounds(149, 373, 95, 16);
+		lblBookType.setBounds(153, 334, 95, 16);
 		contentPane.add(lblBookType);
 		
 		JLabel lblIsbn = new JLabel("ISBN :");
 		lblIsbn.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblIsbn.setBounds(189, 207, 95, 16);
+		lblIsbn.setBounds(193, 168, 95, 16);
 		contentPane.add(lblIsbn);
 		
 		JLabel lblBookId = new JLabel("BOOK ID :");
 		lblBookId.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblBookId.setBounds(167, 126, 95, 16);
+		lblBookId.setBounds(171, 87, 95, 16);
 		contentPane.add(lblBookId);
 		
 		txtBookTitle = new JTextField();
 		txtBookTitle.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtBookTitle.setColumns(10);
-		txtBookTitle.setBounds(255, 286, 300, 33);
+		txtBookTitle.setBounds(259, 247, 300, 33);
 		contentPane.add(txtBookTitle);
 		
 		JLabel lblBookTitle = new JLabel("BOOK TITLE :");
 		lblBookTitle.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblBookTitle.setBounds(149, 293, 95, 16);
+		lblBookTitle.setBounds(153, 254, 95, 16);
 		contentPane.add(lblBookTitle);
 		
 		Button button = new Button("Add Book");
@@ -145,8 +146,10 @@ public class AddBook extends JFrame {
 				String bookISBN = txtIsbn.getText();
 				String bookName = txtBookTitle.getText();
 				String booktype = txtBookType.getSelectedItem().toString();	
+				String bookAuthor =author.getText();
 				
-				Book addbook = new Book(bookId,bookISBN,bookName,booktype);
+				
+				Book addbook = new Book(bookId,bookISBN,bookName,booktype,bookAuthor);
 				
 				AdminController.addBook(addbook);
 				
@@ -154,6 +157,7 @@ public class AddBook extends JFrame {
 				txtBookId.setText(null);
 				txtIsbn.setText(null);
 				txtBookTitle.setText(null);
+				author.setText(null);
 				JOptionPane.showMessageDialog(null, "Book Sucessfully added");
 				
 				
@@ -178,5 +182,16 @@ public class AddBook extends JFrame {
 		button_1.setBackground(SystemColor.textHighlight);
 		button_1.setBounds(526, 477, 126, 33);
 		contentPane.add(button_1);
+		
+		JLabel lblBookAuthor = new JLabel("BOOK AUTHOR :");
+		lblBookAuthor.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblBookAuthor.setBounds(133, 405, 115, 25);
+		contentPane.add(lblBookAuthor);
+		
+		author = new JTextField();
+		author.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		author.setColumns(10);
+		author.setBounds(259, 401, 300, 33);
+		contentPane.add(author);
 	}
 }

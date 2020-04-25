@@ -5,6 +5,27 @@ public class Book {
 	String bookISBN;
 	String booktitle;
 	String bookType;
+	String author;
+	
+	
+	public Book(String bookId, String bookISBN, String booktitle, String bookType, String author) {
+		super();
+		this.bookId = bookId;
+		this.bookISBN = bookISBN;
+		this.booktitle = booktitle;
+		this.bookType = bookType;
+		this.author = author;
+	}
+	
+	public Book() {
+	}
+	
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
 	public String getBookId() {
 		return bookId;
 	}
@@ -30,14 +51,7 @@ public class Book {
 		this.bookType = bookType;
 	}
 	
-	public Book(String bookId, String bookISBN, String booktitle, String bookType) {
-		super();
-		this.bookId = bookId;
-		this.bookISBN = bookISBN;
-		this.booktitle = booktitle;
-		this.bookType = bookType;
-	}
-	
+
 	
 
 }
