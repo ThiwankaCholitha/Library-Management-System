@@ -15,12 +15,15 @@ import java.awt.SystemColor;
 import java.awt.Font;
 import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
 import java.awt.TextField;
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import java.awt.Panel;
 import java.awt.Window.Type;
+import java.awt.Label;
 
 public class Admin extends JFrame {
 
@@ -190,16 +193,23 @@ public class Admin extends JFrame {
 		contentPane.add(panel_3);
 		
 		Panel panel = new Panel();
-		panel.setBackground(new Color(230, 230, 250));
-		panel.setBounds(0, 0, 733, 187);
+		panel.setBackground(new Color(135, 206, 235));
+		panel.setBounds(0, 0, 740, 187);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(0, 0, 740, 187);
 		lblNewLabel.setIcon(new ImageIcon(Admin.class.getResource("/Images/Admin 1.jpg")));
-		lblNewLabel.setBounds(12, 0, 710, 187);
 		lblNewLabel.setForeground(new Color(135, 206, 250));
 		panel.add(lblNewLabel);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBounds(12, 13, 313, 161);
+		panel.add(panel_5);
+		
+		JLabel music = new JLabel("New label");
+		panel_5.add(music);
 		
 		Button button_8 = new Button("Add Admin");
 		button_8.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -226,5 +236,56 @@ public class Admin extends JFrame {
 		button_9.setBackground(SystemColor.textHighlight);
 		button_9.setBounds(437, 522, 180, 40);
 		contentPane.add(button_9);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(new Color(240, 255, 255));
+		panel_4.setBounds(0, 189, 722, 404);
+		contentPane.add(panel_4);
+		
+		lblNewLable_1.
+		public void dateTime() {
+			Thread dateTime = new Thread() {
+				public void run() {
+					for(;;) {
+					try {
+						Calendar cal = new GregorianCalendar();
+						int day = cal.get(Calendar.DAY_OF_MONTH);
+						int month = cal.get(Calendar.DAY_OF_MONTH );
+						int year = cal.get(Calendar.YEAR  );
+						
+						int seconds = cal.get(Calendar.SECOND );
+						int minutes = cal.get(Calendar.MINUTE );
+						int hours = cal.get(Calendar.HOUR  );
+						
+						lblNewLabel_1.setText("Time :"+hours+":"+minutes+":"+seconds+" "+"Date :"+day+" "+month+" "+year);
+						 
+					}
+					catch(Exception e){
+						
+					}
+				}
+			}
+					
+			};
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
+	
+	
+	
+	
 }
+

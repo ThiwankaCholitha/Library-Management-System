@@ -5,15 +5,28 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+
+
+import Classes.BookReturn;
+import Classes.User;
+import Controller.AdminController;
+
 import java.awt.Window.Type;
 import java.awt.Color;
 import java.awt.Panel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+
 import java.awt.Button;
 import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ReturnBook extends JFrame {
 
@@ -94,8 +107,64 @@ public class ReturnBook extends JFrame {
 		textField_1.setColumns(10);
 		textField_1.setBounds(247, 178, 300, 33);
 		contentPane.add(textField_1);
+		textField_1.enable(false);
+		textField_1.setDisabledTextColor(Color.BLACK);
+		
 		
 		Button button = new Button("Return Book");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				User user = new User();
+				BookReturn rb = new BookReturn();
+				
+				user.setUserId(textField.getText());
+				
+				boolean c = AdminController.checkUser(user.getUserId());
+				
+				
+				
+				
+				
+				if(c == true)
+					{
+					rb= AdminController.returnBookTitleAndDate(user);
+					
+					textField_1.setText(rb.getBookTitle());
+					
+					if(rb.getDateDifference()>0) {
+						
+						UIManager um=new UIManager();
+						
+						 um.put("OptionPane.background",Color.white);
+						 um.put("Panel.background",Color.white);
+						 UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.PLAIN, 14));
+						 
+						int fine = 0;
+						fine = rb.getDateDifference() * 100;
+						JOptionPane.showMessageDialog(null, "You have to pay a fine of Rs: "+fine
+								+"\nBook Returning date delayed by: "+rb.getDateDifference());
+						
+					}
+					
+					AdminController.updateReturnBook(rb);
+					}
+				else {
+						UIManager um=new UIManager();
+						um.put("OptionPane.background",Color.white);
+						um.put("Panel.background",Color.white);
+						UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.PLAIN, 14));
+						JOptionPane.showMessageDialog(null, "User Does not exsist");
+						textField.setText(null);
+				}
+				
+			
+		
+				
+				
+				
+			}
+		});
 		button.setForeground(Color.WHITE);
 		button.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		button.setBackground(SystemColor.textHighlight);

@@ -47,6 +47,9 @@ public class User {
 		this.mobilenumber = mobilenumber;
 		this.type = type;
 	}
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 

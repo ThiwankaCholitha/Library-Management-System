@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.JTextField;
-import com.toedter.calendar.JDateChooser;
+
 
 import Classes.Book;
 import Classes.IssueBook;
@@ -133,7 +133,7 @@ public class IssueBooks extends JFrame {
 				if(b1 == true) {
 					
 					
-					AdminController.updatebook(ib);
+					AdminController.updateBook(ib);
 				}
 				else
 					System.out.println("Book is not issued");

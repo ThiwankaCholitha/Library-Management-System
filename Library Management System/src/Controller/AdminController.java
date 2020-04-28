@@ -1,5 +1,7 @@
 package Controller;
 import DatabaseConnection.DBConnection;
+import UserInterfaces.ReturnBook;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +12,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import Classes.Book;
 import Classes.IssueBook;
+import Classes.BookReturn;
 import Classes.User;
 
 public class AdminController {
@@ -190,7 +193,7 @@ public class AdminController {
 	        
 	    }
 		
-
+	//---------------------------------------------------Inserting into issue book --------------------------------------------------------------
 	public static boolean insertIntoBook(IssueBook b1) throws SQLException {
 		
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
@@ -218,8 +221,8 @@ public class AdminController {
 	    			return false;
 	}
 	
-	
-	public static void updatebook(IssueBook b1) {
+	//--------------------------------------Updating the issued value in the book table -----------------------------------------
+	public static void updateBook(IssueBook b1) {
 	try {
 		Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
         PreparedStatement preparedStatement = connection.prepareStatement("update book "
@@ -236,9 +239,107 @@ public class AdminController {
         e.printStackTrace();
 		
 	}
-	
 	}
+	
+	
+
+
+	//----------------------------------Getting the Book title and the date difference from the issuedbook table----------------------------------
+	public static BookReturn returnBookTitleAndDate(User u1) {
+		
+		BookReturn rb = new BookReturn();
+		try {
+			Connection connection = DBConnection.getDBConnection().getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement("select BookTitle,DATEDIFF(curdate(),ib.ReturnedDate),b1.BookId "+ 
+					"from book b1,issuebook ib "+ 
+					"where b1.BookId = ib.BookId && IssuedDate=(select max(IssuedDate) from issuebook) && ClientId=?");
+			preparedStatement.setObject(1, u1.getUserId());
+			
+			ResultSet rst = preparedStatement.executeQuery();
+			
+			
+			while(rst.next()) {
+				rb.setBookTitle(rst.getString(1));
+				rb.setDateDifference(rst.getInt(2));
+				rb.setBookId(rst.getString(3));
+				
+				
+			}
+			
+		}catch (SQLException e) {//--Catch if any sql exception occurred
+            e.printStackTrace();
+            
+		}
+		return rb;
+	 }
+	
+	
+	public static void updateReturnBook(BookReturn b1) {
+		try {
+			Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
+	        PreparedStatement preparedStatement = connection.prepareStatement("update book "
+	        		+"set Issued ='0'"
+	        		+"where BookId =?"
+	        		);
+	        preparedStatement.setObject(1, b1.getBookId());
+	        preparedStatement.executeUpdate();
+			
+			
+			
+			
+		}catch(SQLException e) {//--Catch if any sql exception occurred
+	        e.printStackTrace();
+			
+		}
+	}
+	
+	public static boolean checkUser(String userId) {
+		
+		try {
+			Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
+	        PreparedStatement preparedStatement = connection.prepareStatement("select count(ClientId) " + 
+	        		"from issuebook "+ 
+	        		"where ClientId = ?"
+	        		);
+	        preparedStatement.setObject(1, userId);
+	        ResultSet rst = preparedStatement.executeQuery();
+	        
+	        
+	        if(rst.next()) {
+	        	if(rst.getInt(1)==1) {
+	        	return true;
+	        	}
+	        	
+	        }
+	    }catch(SQLException e) {//--Catch if any sql exception occurred
+	        e.printStackTrace();
+			
+		}
+		
+		return false;
+	}
+		
+	
+	
+	
+	
+	
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
     
 /*   //----------------------------------------------------Update email--------------------------------------------------
     public boolean updateEmail(User user) {
