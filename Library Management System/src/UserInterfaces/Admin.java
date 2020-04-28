@@ -204,6 +204,11 @@ public class Admin extends JFrame {
 		lblNewLabel.setForeground(new Color(135, 206, 250));
 		panel.add(lblNewLabel);
 		
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setBounds(32, 56, 56, 16);
+		panel.add(lblNewLabel_1);
+		
 		Button button_8 = new Button("Add Admin");
 		button_8.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button_8.setBackground(SystemColor.textHighlight);
@@ -236,5 +241,11 @@ public class Admin extends JFrame {
 		contentPane.add(panel_4);
 		
 	}
+	
+	
+	
+	
+	
+	
 }
 
