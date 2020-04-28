@@ -170,9 +170,9 @@ public class Login extends JFrame {
 		public void Image(JLabel l1) {
 			Thread imageCarousel = new Thread() {
 				public void run() {
-					ImageIcon s[] = null;
+					ImageIcon s[] = new ImageIcon[3];
 					int i=0;
-					s[0]=new ImageIcon("G:\\Oxygen Workspace\\Image\\src\\Images\\1.jpg");
+					s[1]=new ImageIcon("G:\\Oxygen Workspace\\Image\\src\\Images\\1.jpg");
 					l1.setBounds(67, 47, 406, 414);
 					
 					s[1]=new ImageIcon("G:\\Oxygen Workspace\\Image\\src\\Images\\2.jpg");
@@ -185,15 +185,19 @@ public class Login extends JFrame {
 					for(;;) {
 					try {
 						
-						l1.setIcon(s[0]);
-						l1.setIcon(s[1]);
+						l1.setIcon(s[i]);
+						//Test
+					
+						
+						
+						i++;
 						
 						
 						
 						
 						if(i == 2) {
 						
-						l1.setIcon(s[2]);
+						
 						i = 0;
 						}
 						
@@ -210,5 +214,4 @@ public class Login extends JFrame {
 		}
 		
 
-	}
 }
