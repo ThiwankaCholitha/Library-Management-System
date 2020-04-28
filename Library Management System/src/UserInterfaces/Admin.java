@@ -204,13 +204,6 @@ public class Admin extends JFrame {
 		lblNewLabel.setForeground(new Color(135, 206, 250));
 		panel.add(lblNewLabel);
 		
-		JPanel panel_5 = new JPanel();
-		panel_5.setBounds(12, 13, 313, 161);
-		panel.add(panel_5);
-		
-		JLabel music = new JLabel("New label");
-		panel_5.add(music);
-		
 		Button button_8 = new Button("Add Admin");
 		button_8.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button_8.setBackground(SystemColor.textHighlight);
@@ -239,53 +232,9 @@ public class Admin extends JFrame {
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(new Color(240, 255, 255));
-		panel_4.setBounds(0, 189, 722, 404);
+		panel_4.setBounds(0, 189, 740, 430);
 		contentPane.add(panel_4);
 		
-		lblNewLable_1.
-		public void dateTime() {
-			Thread dateTime = new Thread() {
-				public void run() {
-					for(;;) {
-					try {
-						Calendar cal = new GregorianCalendar();
-						int day = cal.get(Calendar.DAY_OF_MONTH);
-						int month = cal.get(Calendar.DAY_OF_MONTH );
-						int year = cal.get(Calendar.YEAR  );
-						
-						int seconds = cal.get(Calendar.SECOND );
-						int minutes = cal.get(Calendar.MINUTE );
-						int hours = cal.get(Calendar.HOUR  );
-						
-						lblNewLabel_1.setText("Time :"+hours+":"+minutes+":"+seconds+" "+"Date :"+day+" "+month+" "+year);
-						 
-					}
-					catch(Exception e){
-						
-					}
-				}
-			}
-					
-			};
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
-	
-	
-	
-	
 }
 
