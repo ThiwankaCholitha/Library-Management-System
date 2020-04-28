@@ -165,5 +165,50 @@ public class Login extends JFrame {
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(433, 179, 1, 2);
 		contentPane.add(separator_1);
+		
+		
+		public void Image(JLabel l1) {
+			Thread imageCarousel = new Thread() {
+				public void run() {
+					ImageIcon s[] = null;
+					int i=0;
+					s[0]=new ImageIcon("G:\\Oxygen Workspace\\Image\\src\\Images\\1.jpg");
+					l1.setBounds(67, 47, 406, 414);
+					
+					s[1]=new ImageIcon("G:\\Oxygen Workspace\\Image\\src\\Images\\2.jpg");
+					l1.setBounds(67, 47, 406, 414);
+			
+					s[2]=new ImageIcon("G:\\Oxygen Workspace\\Image\\src\\Images\\3.jpg");
+					l1.setBounds(67, 47, 406, 414);
+				
+					
+					for(;;) {
+					try {
+						
+						l1.setIcon(s[0]);
+						l1.setIcon(s[1]);
+						
+						
+						
+						
+						if(i == 2) {
+						
+						l1.setIcon(s[2]);
+						i = 0;
+						}
+						
+						Thread.sleep(1000); 
+					}
+					catch(Exception e){
+						
+					}
+				}
+			}
+					
+			};
+			imageCarousel.start();
+		}
+		
+
 	}
 }
