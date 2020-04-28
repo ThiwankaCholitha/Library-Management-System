@@ -50,7 +50,7 @@ public class Admin extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Admin() {
+	public Admin(){
 		setType(Type.UTILITY);
 		setTitle("Admin ");
 		setForeground(Color.WHITE);
@@ -198,15 +198,9 @@ public class Admin extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(0, 0, 740, 187);
-		lblNewLabel.setIcon(new ImageIcon(Admin.class.getResource("/Images/Admin 1.jpg")));
-		lblNewLabel.setForeground(new Color(135, 206, 250));
-		panel.add(lblNewLabel);
-		
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(32, 56, 56, 16);
+		lblNewLabel_1.setBounds(32, 56, 125, 16);
 		panel.add(lblNewLabel_1);
 		
 		Button button_8 = new Button("Add Admin");
@@ -240,9 +234,17 @@ public class Admin extends JFrame {
 		panel_4.setBounds(0, 189, 740, 430);
 		contentPane.add(panel_4);
 		
+		
+		dateTime(lblNewLabel_1);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(0, 0, 740, 187);
+		lblNewLabel.setIcon(new ImageIcon(Admin.class.getResource("/Images/Admin 1.jpg")));
+		lblNewLabel.setForeground(new Color(135, 206, 250));
+		panel.add(lblNewLabel);
 	}
 	
-	public void dateTime() {
+	public void dateTime(JLabel l1) {
 		Thread dateTime = new Thread() {
 			public void run() {
 				for(;;) {
@@ -252,11 +254,13 @@ public class Admin extends JFrame {
 					int month = cal.get(Calendar.DAY_OF_MONTH );
 					int year = cal.get(Calendar.YEAR  );
 					
+					Thread.sleep(1000);
+					
 					int seconds = cal.get(Calendar.SECOND );
 					int minutes = cal.get(Calendar.MINUTE );
 					int hours = cal.get(Calendar.HOUR  );
 					
-					//clock.setText("Time :"+hours+":"+minutes+":"+seconds+" "+"Date :"+day+" "+month+" "+year);
+					l1.setText("Time :"+hours+":"+minutes+":"+seconds+" "+"Date :"+day+" "+month+" "+year);
 					 
 				}
 				catch(Exception e){
