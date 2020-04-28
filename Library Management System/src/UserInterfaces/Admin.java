@@ -242,6 +242,32 @@ public class Admin extends JFrame {
 		
 	}
 	
+	public void dateTime() {
+		Thread dateTime = new Thread() {
+			public void run() {
+				for(;;) {
+				try {
+					Calendar cal = new GregorianCalendar();
+					int day = cal.get(Calendar.DAY_OF_MONTH);
+					int month = cal.get(Calendar.DAY_OF_MONTH );
+					int year = cal.get(Calendar.YEAR  );
+					
+					int seconds = cal.get(Calendar.SECOND );
+					int minutes = cal.get(Calendar.MINUTE );
+					int hours = cal.get(Calendar.HOUR  );
+					
+					//clock.setText("Time :"+hours+":"+minutes+":"+seconds+" "+"Date :"+day+" "+month+" "+year);
+					 
+				}
+				catch(Exception e){
+					
+				}
+			}
+		}
+				
+		};
+		dateTime.start();
+	}
 	
 	
 	
