@@ -15,6 +15,7 @@ import java.awt.SystemColor;
 import java.awt.Font;
 import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
@@ -67,10 +68,12 @@ public class Admin extends JFrame {
 		Button button = new Button("Add User");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				AddUser newuser = new AddUser();
-				newuser.setVisible(true);
 				newuser.setLocationRelativeTo(null);
-				setVisible(false);
+				newuser.setVisible(true);
+				newuser.setResizable(false);
+				dispose();
 			}
 		});
 		button.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -97,9 +100,9 @@ public class Admin extends JFrame {
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddBook addbook = new AddBook();
-				setVisible(false);
-				addbook.setVisible(true);
 				addbook.setLocationRelativeTo(null);
+				addbook.setVisible(true);
+				dispose();
 			}
 		});
 		button_2.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -193,14 +196,16 @@ public class Admin extends JFrame {
 		contentPane.add(panel_3);
 		
 		Panel panel = new Panel();
-		panel.setBackground(new Color(135, 206, 235));
+		panel.setBackground(Color.WHITE);
 		panel.setBounds(0, 0, 740, 187);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(32, 56, 125, 16);
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel_1.setForeground(Color.WHITE);
+		lblNewLabel_1.setBounds(12, 118, 125, 16);
 		panel.add(lblNewLabel_1);
 		
 		Button button_8 = new Button("Add Admin");
@@ -218,8 +223,8 @@ public class Admin extends JFrame {
 				login1.setLocationRelativeTo(null);
 				//Cant maximize the size of the window
 				
-//				login1.setResizable(false);
-//				setVisible(false);
+				login1.setResizable(false);
+				setVisible(false);
 				
 			
 			}
@@ -234,33 +239,40 @@ public class Admin extends JFrame {
 		panel_4.setBounds(0, 189, 740, 430);
 		contentPane.add(panel_4);
 		
+		JLabel label = new JLabel("");
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("Tahoma", Font.BOLD, 16));
+		label.setBounds(12, 158, 155, 16);
+		panel.add(label);
 		
-		dateTime(lblNewLabel_1);
+		dateTime(lblNewLabel_1,label);
+		
+		
+		
+		
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(0, 0, 740, 187);
+		lblNewLabel.setBounds(0, 0, 763, 187);
 		lblNewLabel.setIcon(new ImageIcon(Admin.class.getResource("/Images/Admin 1.jpg")));
-		lblNewLabel.setForeground(new Color(135, 206, 250));
+		lblNewLabel.setForeground(Color.WHITE);
 		panel.add(lblNewLabel);
 	}
 	
-	public void dateTime(JLabel l1) {
+	public void dateTime(JLabel l1,JLabel l2) {
+		
+		SimpleDateFormat simpledateformat1 = new SimpleDateFormat("HH:mm:ss");
+		SimpleDateFormat simpledateformat2 = new SimpleDateFormat("YYYY-MM-dd");
 		Thread dateTime = new Thread() {
 			public void run() {
 				for(;;) {
 				try {
 					Calendar cal = new GregorianCalendar();
-					int day = cal.get(Calendar.DAY_OF_MONTH);
-					int month = cal.get(Calendar.DAY_OF_MONTH );
-					int year = cal.get(Calendar.YEAR  );
 					
+					
+					
+					l1.setText("Time: "+simpledateformat1.format(cal.getTime()));
+					l2.setText("Date: "+simpledateformat2.format(cal.getTime()));
 					Thread.sleep(1000);
-					
-					int seconds = cal.get(Calendar.SECOND );
-					int minutes = cal.get(Calendar.MINUTE );
-					int hours = cal.get(Calendar.HOUR  );
-					
-					l1.setText("Time :"+hours+":"+minutes+":"+seconds+" "+"Date :"+day+" "+month+" "+year);
 					 
 				}
 				catch(Exception e){
@@ -272,10 +284,5 @@ public class Admin extends JFrame {
 		};
 		dateTime.start();
 	}
-	
-	
-	
-	
-	
 }
 

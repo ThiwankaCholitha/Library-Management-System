@@ -6,17 +6,27 @@ public class Book {
 	String booktitle;
 	String bookType;
 	String author;
+	int noOfCopies;
 	
 	
-	public Book(String bookId, String bookISBN, String booktitle, String bookType, String author) {
+	public int getNoOfCopies() {
+		return noOfCopies;
+	}
+
+	public void setNoOfCopies(int noOfCopies) {
+		this.noOfCopies = noOfCopies;
+	}
+	
+	
+	public Book(String bookISBN, String booktitle, String bookType, String author, int noOfCopies) {
 		super();
-		this.bookId = bookId;
 		this.bookISBN = bookISBN;
 		this.booktitle = booktitle;
 		this.bookType = bookType;
 		this.author = author;
+		this.noOfCopies = noOfCopies;
 	}
-	
+
 	public Book() {
 	}
 	

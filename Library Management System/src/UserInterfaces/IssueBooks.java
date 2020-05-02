@@ -113,31 +113,37 @@ public class IssueBooks extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				Book issuebook = new Book();
-				String userid = textField.getText(); 
 				
+				String userid = textField.getText(); 
 				String bookName = comboBox.getSelectedItem().toString();
 			
-				
-				
 				issuebook.setBooktitle(bookName);
 				
 				
 				try {
 				IssueBook ib = new IssueBook();
-				ib = AdminController.getBookID(issuebook);
-				
+				ib = AdminController.getBookISBN(issuebook);
 				ib.setClientId(userid);
 				
+				if(ib.getNoOfCopies() >0){
 				
 				boolean b1 = AdminController.insertIntoBook(ib);
-				if(b1 == true) {
+				
+				if(b1) {
 					
 					
 					AdminController.updateBook(ib);
+					JOptionPane.showMessageDialog(null,ib.getBookTitle()+" was Issued");
 				}
-				else
+				else {
 					System.out.println("Book is not issued");
-				}catch(SQLException e1) {//--Catch if any sql exception occurred
+				}
+				
+			}else{
+				JOptionPane.showMessageDialog(null, "This book is not available!");
+			}
+		}
+				catch(SQLException e1) {//--Catch if any sql exception occurred
 			            
 			            if(e1.getErrorCode()==1452) {
 			            	JOptionPane.showMessageDialog(null, "Invalid User ID");
@@ -147,20 +153,8 @@ public class IssueBooks extends JFrame {
 			            }
 			            	
 				}
-			
-				
-				
-				
-	
-				
-	
-
-		
-				
-			
-				
-				
 			}
+				
 		});
 		button.setForeground(Color.WHITE);
 		button.setFont(new Font("Tahoma", Font.PLAIN, 14));

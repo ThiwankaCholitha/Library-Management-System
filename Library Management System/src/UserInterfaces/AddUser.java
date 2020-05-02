@@ -51,6 +51,7 @@ public class AddUser extends JFrame {
 					AddUser frame = new AddUser();
 					frame.setVisible(true);
 					frame.setResizable(false);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -75,7 +76,7 @@ public class AddUser extends JFrame {
 		
 		Panel panel = new Panel();
 		panel.setBackground(new Color(0, 0, 128));
-		panel.setBounds(0, 0, 722, 43);
+		panel.setBounds(0, 0, 740, 43);
 		contentPane.add(panel);
 		
 		JPanel panel_1 = new JPanel();
@@ -161,11 +162,17 @@ public class AddUser extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				//Getting the eneterd information from the admin
-				String uId = textUid.getText();
+				String uId = textUid.getText().toUpperCase();
+				
 				String uName = textUname.getText();
 				String uEmail = textEmail.getText();
 				String uMobile = textPhone.getText();
 				String utype = userType.getSelectedItem().toString();
+				
+				String usrIdCheck = uId.substring(0, 2);
+				System.out.println(usrIdCheck);
+				
+				if(uId.length()==10 &&(usrIdCheck.equals("IT")||usrIdCheck.equals("EN") || usrIdCheck.equals("BS"))) {
 				
 				//Creating the user type object with overloaded constructor
 				User newUser = new User(uId,uName,uEmail,uMobile,utype);
@@ -178,6 +185,13 @@ public class AddUser extends JFrame {
 				textEmail.setText(null);
 				textPhone.setText(null);
 				}
+			
+			else {
+				JOptionPane.showMessageDialog(null, "Enter a valid Reg number");
+				textUid.setText(null);
+			}
+			}
+			
 		});
 		button.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		button.setBackground(SystemColor.textHighlight);
@@ -187,10 +201,11 @@ public class AddUser extends JFrame {
 		Button button_1 = new Button("Back");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			
 			Admin admin = new Admin();
-			admin.setVisible(true);
-			setVisible(false);
 			admin.setLocationRelativeTo(null);
+			admin.setVisible(true);
+			dispose();
 				
 			}
 		});

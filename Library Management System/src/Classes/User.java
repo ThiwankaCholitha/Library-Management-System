@@ -39,10 +39,10 @@ public class User {
 		this.type = type;
 	}
 	
-	public User(String userName, String userId, String userEmail, String mobilenumber, String type) {
+	public User(String userId,String userName, String userEmail, String mobilenumber, String type) {
 		super();
-		this.userName = userName;
 		this.userId = userId;
+		this.userName = userName;
 		this.userEmail = userEmail;
 		this.mobilenumber = mobilenumber;
 		this.type = type;

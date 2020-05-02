@@ -2,11 +2,19 @@ package Classes;
 
 public class IssueBook {
 
-	String bookId;
+	String ISBN;
 	String clientId;
 	String date;
 	String returnDate;
 	String BookTitle;
+	
+	public int getNoOfCopies() {
+		return noOfCopies;
+	}
+	public void setNoOfCopies(int noOfCopies) {
+		this.noOfCopies = noOfCopies;
+	}
+	int noOfCopies;
 	
 	public String getBookTitle() {
 		return BookTitle;
@@ -14,11 +22,11 @@ public class IssueBook {
 	public void setBookTitle(String bookTitle) {
 		BookTitle = bookTitle;
 	}
-	public String getBookId() {
-		return bookId;
+	public String getBookISBN() {
+		return ISBN;
 	}
-	public void setBookId(String bookId) {
-		this.bookId = bookId;
+	public void setBookISBN(String isbn) {
+		this.ISBN =isbn ;
 	}
 	
 	public String getClientId() {

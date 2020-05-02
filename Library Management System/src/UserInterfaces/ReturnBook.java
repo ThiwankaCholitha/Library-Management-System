@@ -126,8 +126,8 @@ public class ReturnBook extends JFrame {
 				
 				
 				
-				if(c == true)
-					{
+				if(c){
+					
 					rb= AdminController.returnBookTitleAndDate(user);
 					
 					textField_1.setText(rb.getBookTitle());
@@ -148,6 +148,7 @@ public class ReturnBook extends JFrame {
 					}
 					
 					AdminController.updateReturnBook(rb);
+					AdminController.updateIssuedStatus(user);
 					}
 				else {
 						UIManager um=new UIManager();

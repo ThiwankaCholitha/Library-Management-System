@@ -7,6 +7,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Classes.UserAdmin;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -43,9 +46,10 @@ public class Login extends JFrame {
 					Login frame = new Login();
 					frame.setVisible(true);
 					
+					
 					//Cant maximize the size of the window
 					frame.setResizable(false);
-					
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -70,46 +74,35 @@ public class Login extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 346, 431);
+		panel.setBounds(0, 0, 346, 400);
 		panel.setBackground(new Color(0, 0, 128));
 		panel.setForeground(Color.LIGHT_GRAY);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/Images/Main.jpg")));
-		lblNewLabel.setBounds(-235, -62, 581, 493);
-		lblNewLabel.setForeground(Color.LIGHT_GRAY);
-		panel.add(lblNewLabel);
 		
 		Button button = new Button("Login");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				//Getting the user input to variables.
-				String username = txtUsername.getText();
-				String password = txtPassword.getText();
-				
-				//Checking weather they empty or not
-//				if(username.length() == 0) {
-//					JOptionPane.showMessageDialog(null,"Empty Fields Detected!");
-//				}
-//				else if(password.length() ==0) {
-//					JOptionPane.showMessageDialog(null, "Empty Fields Detected!");
-//				}
-				
+				UserAdmin ua = new UserAdmin();
+				ua.setUserName(txtUsername.getText());
+				ua.setAdminPassword(txtPassword.getText());
 				
 				//Declaring a variable as login to retrive the status from 
 				boolean login; 
-				login = AdminController.chkLogin(username,password) ;
+				login = AdminController.chkLogin(ua) ;
 				
 				if(login==true) { 
-					
+				
 					Admin ad1 = new Admin();
-					ad1.setLocationRelativeTo(null);
+					dispose();
 					ad1.setVisible(true);
+					ad1.setLocationRelativeTo(null);
 					
-					setVisible(false);
+					
+					
+					
 					JOptionPane.showMessageDialog(null, "Login Sucessful");
 				}
 				else {
@@ -166,52 +159,57 @@ public class Login extends JFrame {
 		separator_1.setBounds(433, 179, 1, 2);
 		contentPane.add(separator_1);
 		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/Images/Main.jpg")));
+		lblNewLabel.setBounds(-235, -62, 581, 493);
+		lblNewLabel.setForeground(Color.LIGHT_GRAY);
+		panel.add(lblNewLabel);
 		
-		public void Image(JLabel l1) {
-			Thread imageCarousel = new Thread() {
-				public void run() {
-					ImageIcon s[] = new ImageIcon[3];
-					int i=0;
-					s[1]=new ImageIcon("G:\\Oxygen Workspace\\Image\\src\\Images\\1.jpg");
-					l1.setBounds(67, 47, 406, 414);
-					
-					s[1]=new ImageIcon("G:\\Oxygen Workspace\\Image\\src\\Images\\2.jpg");
-					l1.setBounds(67, 47, 406, 414);
+		Image(lblNewLabel);
+	}
+	public void Image(JLabel l1) {
+		Thread imageCarousel = new Thread() {
+			public void run() {
+				ImageIcon s[] = new ImageIcon[3];
+				int i=0;
+				s[0]=new ImageIcon("G:\\Oxygen Workspace\\Library\\Library Management System\\src\\Images\\lg2.png");
+				l1.setBounds(0, -10, 406, 410);
+				
+				s[1]=new ImageIcon("G:\\Oxygen Workspace\\Library\\Library Management System\\src\\Images\\lg1.png");
+				l1.setBounds(0, -10, 406, 410);
+		
+				s[2]=new ImageIcon("G:\\Oxygen Workspace\\Library\\Library Management System\\src\\Images\\lg3.png");
+				l1.setBounds(0, -10, 406, 410);
 			
-					s[2]=new ImageIcon("G:\\Oxygen Workspace\\Image\\src\\Images\\3.jpg");
-					l1.setBounds(67, 47, 406, 414);
+				
+				for(;;) {
+				try {
+					
+					l1.setIcon(s[i]);
+				
 				
 					
-					for(;;) {
-					try {
-						
-						l1.setIcon(s[i]);
-						//Test
 					
-						
-						
-						i++;
-						
-						
-						
-						
-						if(i == 2) {
-						
-						
-						i = 0;
-						}
-						
-						Thread.sleep(1000); 
+					i++;
+					
+					
+					
+					
+					if(i == 3) {
+					
+					
+					i = 0;
 					}
-					catch(Exception e){
-						
-					}
+					
+					Thread.sleep(2000); 
+				}
+				catch(Exception e){
+					
 				}
 			}
-					
-			};
-			imageCarousel.start();
 		}
-		
-
+				
+		};
+		imageCarousel.start();
+	}
 }

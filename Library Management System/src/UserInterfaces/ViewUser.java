@@ -182,6 +182,17 @@ public class ViewUser extends JFrame {
 		    panel_4.add(lblNewLabel);
 		    
 		    Button button_2 = new Button("Search");
+		    button_2.addActionListener(new ActionListener() {
+		    	public void actionPerformed(ActionEvent e) {
+		    		for(int i = 0; i < table.getRowCount(); i++){//For each row
+		    		    for(int j = 0; j < table.getColumnCount(); j++){//For each column in that row
+		    		        if(table.getModel().getValueAt(i, j).equals("STRING_TO_SEARCH")){//Search the model
+		    		            System.out.println(table.getModel().getValueAt(i, j));//Print if found string
+		    		        }
+		    		    }//For loop inner
+		    		}//For loop outer
+		    	}
+		    });
 		    button_2.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14));
 		    button_2.setBackground(new Color(0, 0, 128));
 		    button_2.setBounds(266, 71, 79, 29);
