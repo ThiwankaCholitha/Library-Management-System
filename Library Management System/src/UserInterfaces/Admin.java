@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -39,9 +42,9 @@ public class Admin extends JFrame {
 				try {
 					Admin frame = new Admin();
 					frame.setVisible(true);
-					frame.setResizable(false);
+					//frame.setResizable(false);
 					
-				} catch (Exception e) {
+				} catch (Exception e){
 					e.printStackTrace();
 				}
 			}
@@ -81,13 +84,11 @@ public class Admin extends JFrame {
 		button.setBounds(119, 193, 180, 40);
 		contentPane.add(button);
 		
-		Button button_1 = new Button("View Users");
+		Button button_1 = new Button("View / Update Users");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ViewUser viewuser = new ViewUser();
-				viewuser.setVisible(true);
-				viewuser.setLocationRelativeTo(null);
-				setVisible(false);
+				UserView viewuser = new UserView();
+				
 				
 				}
 		});
@@ -133,6 +134,17 @@ public class Admin extends JFrame {
 		contentPane.add(separator_3);
 		
 		Button button_4 = new Button("Issue Books");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				IssueBooks issuebook = new IssueBooks();
+				issuebook.setLocationRelativeTo(null);
+				issuebook.setVisible(true);
+				issuebook.setResizable(false);
+				dispose();
+				
+			}
+		});
 		button_4.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button_4.setBackground(SystemColor.textHighlight);
 		button_4.setBounds(119, 354, 180, 40);
@@ -145,20 +157,18 @@ public class Admin extends JFrame {
 		contentPane.add(button_5);
 		
 		Button button_6 = new Button("Return Books");
+		button_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ReturnBook returnbook = new ReturnBook();
+				returnbook.setLocationRelativeTo(null);
+				returnbook.setVisible(true);
+				dispose();
+			}
+		});
 		button_6.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button_6.setBackground(SystemColor.textHighlight);
 		button_6.setBounds(119, 438, 180, 40);
 		contentPane.add(button_6);
-		
-		Button button_7 = new Button("Remove User");
-		button_7.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		button_7.setFont(new Font("Tahoma", Font.BOLD, 16));
-		button_7.setBackground(SystemColor.textHighlight);
-		button_7.setBounds(437, 438, 180, 40);
-		contentPane.add(button_7);
 		
 		JSeparator separator_4 = new JSeparator();
 		separator_4.setBounds(192, 392, 1, 2);
@@ -208,13 +218,23 @@ public class Admin extends JFrame {
 		lblNewLabel_1.setBounds(12, 118, 125, 16);
 		panel.add(lblNewLabel_1);
 		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(new Color(240, 255, 255));
+		panel_4.setBounds(0, 189, 740, 430);
+		contentPane.add(panel_4);
+		panel_4.setLayout(null);
+		
 		Button button_8 = new Button("Add Admin");
+		button_8.setForeground(Color.WHITE);
+		button_8.setBounds(438, 248, 180, 40);
+		panel_4.add(button_8);
 		button_8.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button_8.setBackground(SystemColor.textHighlight);
-		button_8.setBounds(119, 522, 180, 40);
-		contentPane.add(button_8);
 		
 		Button button_9 = new Button("Log Out");
+		button_9.setForeground(Color.WHITE);
+		button_9.setBounds(282, 333, 180, 40);
+		panel_4.add(button_9);
 		button_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login login1 = new Login();
@@ -231,13 +251,6 @@ public class Admin extends JFrame {
 		});
 		button_9.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button_9.setBackground(SystemColor.textHighlight);
-		button_9.setBounds(437, 522, 180, 40);
-		contentPane.add(button_9);
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setBackground(new Color(240, 255, 255));
-		panel_4.setBounds(0, 189, 740, 430);
-		contentPane.add(panel_4);
 		
 		JLabel label = new JLabel("");
 		label.setForeground(Color.WHITE);

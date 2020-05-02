@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import Classes.Book;
@@ -16,6 +17,7 @@ import java.awt.GridBagLayout;
 import java.awt.Panel;
 import java.awt.Window.Type;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.JComboBox;
 import java.awt.Font;
 import javax.swing.JLabel;
@@ -23,8 +25,10 @@ import javax.swing.JOptionPane;
 
 import java.awt.Button;
 import java.awt.SystemColor;
+import java.awt.TextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JSpinner;
 
 public class AddBook extends JFrame {
 
@@ -33,6 +37,7 @@ public class AddBook extends JFrame {
 	private JTextField txtBookTitle;
 	private JTextField author;
 	private JTextField noOfCopies;
+	private JTextField coppies;
 
 	/**
 	 * Launch the application.
@@ -91,7 +96,7 @@ public class AddBook extends JFrame {
 		txtIsbn = new JTextField();
 		txtIsbn.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtIsbn.setColumns(10);
-		txtIsbn.setBounds(260, 81, 300, 33);
+		txtIsbn.setBounds(258, 61, 300, 33);
 		contentPane.add(txtIsbn);
 		
 		JComboBox txtBookType = new JComboBox();
@@ -99,7 +104,7 @@ public class AddBook extends JFrame {
 		txtBookType.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtBookType.setEditable(true);
 		txtBookType.setBackground(Color.WHITE);
-		txtBookType.setBounds(259, 248, 300, 33);
+		txtBookType.setBounds(258, 210, 300, 33);
 		contentPane.add(txtBookType);
 		txtBookType.addItem("I.T");
 		txtBookType.addItem("B.S");
@@ -108,23 +113,23 @@ public class AddBook extends JFrame {
 		
 		JLabel lblBookType = new JLabel("BOOK TYPE :");
 		lblBookType.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblBookType.setBounds(153, 254, 95, 16);
+		lblBookType.setBounds(152, 216, 95, 16);
 		contentPane.add(lblBookType);
 		
 		JLabel lblIsbn = new JLabel("ISBN :");
 		lblIsbn.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblIsbn.setBounds(193, 88, 95, 16);
+		lblIsbn.setBounds(191, 68, 95, 16);
 		contentPane.add(lblIsbn);
 		
 		txtBookTitle = new JTextField();
 		txtBookTitle.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtBookTitle.setColumns(10);
-		txtBookTitle.setBounds(259, 167, 300, 33);
+		txtBookTitle.setBounds(258, 133, 300, 33);
 		contentPane.add(txtBookTitle);
 		
 		JLabel lblBookTitle = new JLabel("BOOK TITLE :");
 		lblBookTitle.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblBookTitle.setBounds(153, 174, 95, 16);
+		lblBookTitle.setBounds(152, 140, 95, 16);
 		contentPane.add(lblBookTitle);
 		
 		Button button = new Button("Add Book");
@@ -140,60 +145,143 @@ public class AddBook extends JFrame {
 				
 				
 				Book addbook = new Book(bookISBN,bookName,booktype,bookAuthor,copies);
-				
-				
 				AdminController.addBook(addbook);
 				
+				UIManager um=new UIManager();
+				um.put("OptionPane.background",Color.white);
+				um.put("Panel.background",Color.white);
+				UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.PLAIN, 14));
 				
 				
+				JOptionPane.showMessageDialog(null, "Book Sucessfully added");
 				txtIsbn.setText(null);
 				txtBookTitle.setText(null);
 				author.setText(null);
-				JOptionPane.showMessageDialog(null, "Book Sucessfully added");
+				noOfCopies.setText(null);
 				
 				
 				}
 		});
 		button.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		button.setBackground(SystemColor.textHighlight);
-		button.setBounds(133, 474, 126, 33);
+		button.setBounds(118, 470, 126, 33);
 		contentPane.add(button);
 		
 		Button button_1 = new Button("Back");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				
 				Admin admin = new Admin();
 				admin.setLocationRelativeTo(null);
 				admin.setVisible(true);
-				admin.setResizable(false);
+				//admin.setResizable(false);
+				dispose();
 			}
 		});
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		button_1.setBackground(SystemColor.textHighlight);
-		button_1.setBounds(526, 474, 126, 33);
+		button_1.setBounds(525, 470, 126, 33);
 		contentPane.add(button_1);
 		
 		JLabel lblBookAuthor = new JLabel("BOOK AUTHOR :");
 		lblBookAuthor.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblBookAuthor.setBounds(133, 325, 115, 25);
+		lblBookAuthor.setBounds(132, 291, 115, 25);
 		contentPane.add(lblBookAuthor);
 		
 		author = new JTextField();
 		author.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		author.setColumns(10);
-		author.setBounds(259, 321, 300, 33);
+		author.setBounds(258, 287, 300, 33);
 		contentPane.add(author);
 		
 		JLabel lblNumberOfCopies = new JLabel("NUMBER OF COPIES :");
 		lblNumberOfCopies.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNumberOfCopies.setBounds(97, 400, 141, 25);
+		lblNumberOfCopies.setBounds(99, 361, 141, 25);
 		contentPane.add(lblNumberOfCopies);
 		
 		noOfCopies = new JTextField();
 		noOfCopies.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		noOfCopies.setColumns(10);
-		noOfCopies.setBounds(258, 396, 300, 33);
+		noOfCopies.setBounds(258, 357, 173, 33);
 		contentPane.add(noOfCopies);
+		
+		Button button_2 = new Button("ISBN Check");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String ISBN = txtIsbn.getText();
+				
+				Book bk = new Book();
+				bk.setBookISBN(ISBN);
+				
+				//AdminController.checkISBN(bk);
+				Boolean c = AdminController.ckISBN(bk);
+				System.out.println(bk);
+				
+				if(c == true) {
+					JOptionPane.showMessageDialog(null, "This book is available.Update the quantity");
+					
+					
+					txtIsbn.setEnabled(false);
+					txtIsbn.setDisabledTextColor(Color.black);
+					txtBookTitle.setText(bk.getBooktitle());
+					txtBookType.setSelectedItem(bk.getBookType());
+					txtBookType.setEnabled(false);
+					author.setText(bk.getAuthor());
+					noOfCopies.setText(Integer.toString(bk.getNoOfCopies()));
+					noOfCopies.setEnabled(false);
+					noOfCopies.setDisabledTextColor(Color.BLACK);
+					
+					
+				}else {
+					JOptionPane.showMessageDialog(null, "This book is not available. Add the book Details");
+					txtIsbn.setText(null);
+					coppies.setEnabled(false);
+				
+				}
+				
+			}
+		});
+		button_2.setBackground(new Color(0, 0, 128));
+		button_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		button_2.setBounds(583, 61, 88, 33);
+		contentPane.add(button_2);
+		
+		Button button_3 = new Button("Update Book");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String ISBN = txtIsbn.getText();
+				String bookTitle = txtBookTitle.getText();
+				String bookType = txtBookType.getSelectedItem().toString(); 
+				String authorname = author.getText();
+				int noOfcpy = Integer.parseInt(noOfCopies.getText());
+				int addCpy = Integer.parseInt(coppies.getText());
+				
+				int totalCoppies = noOfcpy+addCpy;
+				
+				Book bk = new Book(ISBN,bookTitle,bookType,authorname,totalCoppies);
+				
+				AdminController.updatebook2(bk);
+				
+				
+				
+			}
+		});
+		button_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		button_3.setBackground(SystemColor.textHighlight);
+		button_3.setBounds(320, 470, 126, 33);
+		contentPane.add(button_3);
+		
+		JLabel lblAddCoppies = new JLabel("ADD COPPIES:");
+		lblAddCoppies.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblAddCoppies.setBounds(145, 424, 141, 25);
+		contentPane.add(lblAddCoppies);
+		
+		coppies = new JTextField();
+		coppies.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		coppies.setColumns(10);
+		coppies.setBounds(258, 420, 173, 33);
+		contentPane.add(coppies);
+		coppies.setText("0");
 	}
 }

@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableRowSorter;
 
 import Controller.AdminController;
 import javafx.scene.text.Font;
@@ -134,7 +135,7 @@ public class ViewUser extends JFrame {
 		 dtm.setColumnIdentifiers(header);
 		    table.setModel(dtm);
 		    table.setEnabled(false);
-		
+		    
 		 //Setting the colums accoring to the neeeded size.
 		    table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		    
@@ -180,23 +181,6 @@ public class ViewUser extends JFrame {
 		    lblNewLabel.setBounds(12, 13, 112, 49);
 		    lblNewLabel.setIcon(new ImageIcon(ViewUser.class.getResource("/Images/search (2).png")));
 		    panel_4.add(lblNewLabel);
-		    
-		    Button button_2 = new Button("Search");
-		    button_2.addActionListener(new ActionListener() {
-		    	public void actionPerformed(ActionEvent e) {
-		    		for(int i = 0; i < table.getRowCount(); i++){//For each row
-		    		    for(int j = 0; j < table.getColumnCount(); j++){//For each column in that row
-		    		        if(table.getModel().getValueAt(i, j).equals("STRING_TO_SEARCH")){//Search the model
-		    		            System.out.println(table.getModel().getValueAt(i, j));//Print if found string
-		    		        }
-		    		    }//For loop inner
-		    		}//For loop outer
-		    	}
-		    });
-		    button_2.setFont(new java.awt.Font("Tahoma", java.awt.Font.PLAIN, 14));
-		    button_2.setBackground(new Color(0, 0, 128));
-		    button_2.setBounds(266, 71, 79, 29);
-		    contentPane.add(button_2);
 		    table.getColumnModel().getColumn(0).setPreferredWidth(120);
 		    table.getColumnModel().getColumn(1).setPreferredWidth(180);
 		    table.getColumnModel().getColumn(2).setPreferredWidth(160);

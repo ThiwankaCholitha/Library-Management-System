@@ -65,7 +65,7 @@ public class IssueBooks extends JFrame {
 		
 		Panel panel = new Panel();
 		panel.setBackground(new Color(0, 0, 128));
-		panel.setBounds(0, 0, 722, 43);
+		panel.setBounds(0, 0, 740, 43);
 		contentPane.add(panel);
 		
 		JPanel panel_1 = new JPanel();
@@ -133,7 +133,7 @@ public class IssueBooks extends JFrame {
 					
 					
 					AdminController.updateBook(ib);
-					JOptionPane.showMessageDialog(null,ib.getBookTitle()+" was Issued");
+					JOptionPane.showMessageDialog(null,"Book was Issued");
 				}
 				else {
 					System.out.println("Book is not issued");
@@ -163,6 +163,14 @@ public class IssueBooks extends JFrame {
 		contentPane.add(button);
 		
 		Button button_1 = new Button("Back");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin admin = new Admin();
+				admin.setLocationRelativeTo(null);
+				admin.setVisible(true);
+				dispose();
+			}
+		});
 		button_1.setForeground(Color.WHITE);
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		button_1.setBackground(SystemColor.textHighlight);

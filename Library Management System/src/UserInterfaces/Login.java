@@ -18,6 +18,7 @@ import java.awt.Button;
 import java.awt.SystemColor;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.JPasswordField;
 import java.awt.Panel;
 import javax.swing.JSeparator;
@@ -93,6 +94,11 @@ public class Login extends JFrame {
 				boolean login; 
 				login = AdminController.chkLogin(ua) ;
 				
+				UIManager um=new UIManager();
+				um.put("OptionPane.background",Color.white);
+				um.put("Panel.background",Color.white);
+				
+				UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.PLAIN, 14));
 				if(login==true) { 
 				
 					Admin ad1 = new Admin();

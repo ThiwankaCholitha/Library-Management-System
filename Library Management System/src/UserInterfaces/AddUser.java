@@ -15,6 +15,7 @@ import javafx.scene.control.ComboBox;
 import java.awt.Color;
 import java.awt.Panel;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
@@ -171,6 +172,11 @@ public class AddUser extends JFrame {
 				
 				String usrIdCheck = uId.substring(0, 2);
 				System.out.println(usrIdCheck);
+				
+				UIManager um=new UIManager();
+				um.put("OptionPane.background",Color.white);
+				um.put("Panel.background",Color.white);
+				UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.PLAIN, 14));
 				
 				if(uId.length()==10 &&(usrIdCheck.equals("IT")||usrIdCheck.equals("EN") || usrIdCheck.equals("BS"))) {
 				

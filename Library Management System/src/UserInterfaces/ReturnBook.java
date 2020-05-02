@@ -122,7 +122,12 @@ public class ReturnBook extends JFrame {
 				
 				boolean c = AdminController.checkUser(user.getUserId());
 				
+				UIManager um=new UIManager();
 				
+				 um.put("OptionPane.background",Color.white);
+				 um.put("Panel.background",Color.white);
+				 UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.PLAIN, 14));
+				 
 				
 				
 				
@@ -132,28 +137,29 @@ public class ReturnBook extends JFrame {
 					
 					textField_1.setText(rb.getBookTitle());
 					
+				
+					
 					if(rb.getDateDifference()>0) {
 						
-						UIManager um=new UIManager();
 						
-						 um.put("OptionPane.background",Color.white);
-						 um.put("Panel.background",Color.white);
-						 UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.PLAIN, 14));
-						 
 						int fine = 0;
 						fine = rb.getDateDifference() * 100;
 						JOptionPane.showMessageDialog(null, "You have to pay a fine of Rs: "+fine
 								+"\nBook Returning date delayed by: "+rb.getDateDifference());
 						
 					}
-					
+					else {
 					AdminController.updateReturnBook(rb);
 					AdminController.updateIssuedStatus(user);
+					JOptionPane.showMessageDialog(null, "Book Returned Sucessfully!");
+					textField.setText(null);
+					
 					}
+				}
 				else {
-						UIManager um=new UIManager();
-						um.put("OptionPane.background",Color.white);
-						um.put("Panel.background",Color.white);
+//						UIManager um=new UIManager();
+//						um.put("OptionPane.background",Color.white);
+//						um.put("Panel.background",Color.white);
 						UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.PLAIN, 14));
 						JOptionPane.showMessageDialog(null, "User Does not exsist");
 						textField.setText(null);
@@ -173,6 +179,14 @@ public class ReturnBook extends JFrame {
 		contentPane.add(button);
 		
 		Button button_1 = new Button("Back");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Admin admin = new Admin();
+				admin.setLocationRelativeTo(null);
+				admin.setVisible(true);
+				dispose();
+			}
+		});
 		button_1.setForeground(Color.WHITE);
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		button_1.setBackground(SystemColor.textHighlight);

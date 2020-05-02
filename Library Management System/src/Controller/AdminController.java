@@ -10,6 +10,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import com.mysql.cj.protocol.Resultset;
+
 import Classes.Book;
 import Classes.IssueBook;
 import Classes.BookReturn;
@@ -167,13 +170,14 @@ public class AdminController {
             																	"Where clientId =?");
            
             preparedStatement.setObject(1,u1.getUserId());
-            preparedStatement.executeUpdate();
+
+           
             
-            //if(rst.next()) {}
+           
             } catch (SQLException e) {//--Catch if any sql exception occurred
             e.printStackTrace();
         }
-    	
+   	
     	
     }
     
@@ -388,6 +392,157 @@ public class AdminController {
 	}
 	
 	
+	public static User getUserDetails(User u1) {
+		 
+		User detaileduser =  new User();
+		try {
+	            Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
+	            PreparedStatement preparedStatement = connection.prepareStatement("" +
+	                    "select ClientName,Email,PhoneNumber " +
+	                    "from client " +
+	                    "where ClientId=?");//---Prepare sql as a java object
+	            preparedStatement.setObject(1,u1.getUserId());//---Set values to sql object
+	            
+	            
+	         
+	            ResultSet rst = preparedStatement.executeQuery();//---Execute sql and store result
+	            
+	            if (rst.next()) {//---Navigate pointer to results
+	            	
+	            	detaileduser.setUserName(rst.getString(1));
+	            	detaileduser.setUserEmail(rst.getString(2));
+	            	detaileduser.setMobilenumber(rst.getString(3));
+	                
+	            }
+	        } catch (SQLException e) {//--Catch if any sql exception occurred
+	            e.printStackTrace();
+	        }
+		return detaileduser;
+		
+	}
+	
+	
+	public static void updateUserDetails(User u1) {
+		try {
+			Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
+	        PreparedStatement preparedStatement = connection.prepareStatement("update client "
+	        		+"set ClientName = ?, Email = ?, PhoneNumber = ? "
+	        		+"where ClientId=?;"
+	        		);
+	        preparedStatement.setObject(1, u1.getUserName());
+	        preparedStatement.setObject(2, u1.getUserEmail());
+	        preparedStatement.setObject(3, u1.getMobilenumber());
+	        preparedStatement.setObject(4, u1.getUserId());
+	        preparedStatement.executeUpdate();
+			
+			
+			
+			
+		}catch(SQLException e) {//--Catch if any sql exception occurred
+	        e.printStackTrace();
+			
+		}
+	}
+	
+public static Book checkISBN(Book bk) {
+		
+		try {
+			Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
+	        PreparedStatement preparedStatement = connection.prepareStatement("select ISBN,BookTitle,Author,BookType,NoOFCopies " + 
+	        		"from book "+ 
+	        		"where ISBN = ?"
+	        		);
+	        preparedStatement.setObject(1,bk.getBookISBN());
+	        ResultSet rst = preparedStatement.executeQuery();
+	        
+	        
+	        if(rst.next()) {
+	        	System.out.println(123);
+	        	System.out.println(rst.getString(1).equals(""));
+	        	
+	        	if(!rst.getString(1).isEmpty()) {
+	        	bk.setBooktitle(rst.getString(2));
+	        	bk.setAuthor(rst.getString(3));
+	        	bk.setBookType(rst.getString(4));
+	        	bk.setNoOfCopies(rst.getInt(5));
+	        	
+	        	return bk;
+	        }
+	        	else {
+	        		System.out.println(456);
+	        		return null;}
+	        	}   	
+	    }catch(SQLException e) {//--Catch if any sql exception occurred
+	        e.printStackTrace();
+			
+		}
+		
+		return null;
+	}
+
+
+
+public static boolean ckISBN(Book bk) {
+	
+	try {
+		Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
+        PreparedStatement preparedStatement = connection.prepareStatement("select ISBN,BookTitle,Author,BookType,NoOFCopies " + 
+        		"from book "+ 
+        		"where ISBN = ?"
+        		);
+        preparedStatement.setObject(1,bk.getBookISBN());
+        ResultSet rst = preparedStatement.executeQuery();
+        
+        
+        if(rst.next()) {
+        	
+        	bk.setBooktitle(rst.getString(2));
+        	bk.setAuthor(rst.getString(3));
+        	bk.setBookType(rst.getString(4));
+        	bk.setNoOfCopies(rst.getInt(5));
+        	
+        	return true;
+        }}catch(SQLException e) {//--Catch if any sql exception occurred
+        e.printStackTrace();
+		
+	}
+	return false;	
+	}
+
+
+	public static void updatebook2(Book bk) {
+		try {
+			Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
+	        PreparedStatement preparedStatement = connection.prepareStatement("update book "
+	        		+"set BookTitle = ?, Author = ?, BookType= ?, NoOFCopies = ? "
+	        		+"where ISBN =?"
+	        		);
+	        preparedStatement.setObject(1,bk.getBooktitle());
+	        preparedStatement.setObject(2,bk.getAuthor());
+	        preparedStatement.setObject(3,bk.getBookType());
+	        preparedStatement.setObject(4,bk.getNoOfCopies());
+	        preparedStatement.setObject(5,bk.getBookISBN());
+	        
+	        
+	        preparedStatement.executeUpdate();
+			
+			
+			
+			
+		}catch(SQLException e) {//--Catch if any sql exception occurred
+	        e.printStackTrace();
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
 	
 }
 
