@@ -120,7 +120,7 @@ public class ReturnBook extends JFrame {
 				
 				user.setUserId(textField.getText());
 				
-				boolean c = AdminController.checkUser(user.getUserId());
+				boolean c = AdminController.checkUser(user);
 				
 				UIManager um=new UIManager();
 				

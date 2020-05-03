@@ -42,7 +42,7 @@ public class Admin extends JFrame {
 				try {
 					Admin frame = new Admin();
 					frame.setVisible(true);
-					//frame.setResizable(false);
+					
 					
 				} catch (Exception e){
 					e.printStackTrace();
@@ -75,7 +75,7 @@ public class Admin extends JFrame {
 				AddUser newuser = new AddUser();
 				newuser.setLocationRelativeTo(null);
 				newuser.setVisible(true);
-				newuser.setResizable(false);
+			
 				dispose();
 			}
 		});
@@ -88,6 +88,9 @@ public class Admin extends JFrame {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserView viewuser = new UserView();
+				viewuser.setVisible(true);
+				viewuser.setLocationRelativeTo(null);
+				dispose();
 				
 				
 				}
@@ -238,13 +241,10 @@ public class Admin extends JFrame {
 		button_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login login1 = new Login();
-				setVisible(false);
 				login1.setVisible(true);
 				login1.setLocationRelativeTo(null);
-				//Cant maximize the size of the window
-				
 				login1.setResizable(false);
-				setVisible(false);
+				dispose();
 				
 			
 			}

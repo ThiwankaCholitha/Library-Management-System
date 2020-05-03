@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import org.omg.CORBA.PUBLIC_MEMBER;
+
 import com.mysql.cj.protocol.Resultset;
 
 import Classes.Book;
@@ -61,28 +63,7 @@ public class AdminController {
     	return ua;
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //----------------------------------------------------Adding user------------------------------------------------------
+     //----------------------------------------------------Adding user------------------------------------------------------
     public static void addUser(User user) {
         try {
             Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
@@ -181,33 +162,7 @@ public class AdminController {
     	
     }
     
-    //------------------------------------Getting Exsisting books in the databse to issue books.-----------------------------
-    
-    public static ArrayList<String> getBookList(){
-    
-    	
-    	ArrayList<String> issuedBooks = new ArrayList<>();
-    	String bookTitle = null;
-   	 try {
-            Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
-            PreparedStatement preparedStatement = connection.prepareStatement
-           ("select BookTitle "+
-            "from book ");//---Prepare sql as a java object
-            ResultSet rst = preparedStatement.executeQuery();//---Execute sql and store result
-            {//---Navigate pointer to result rows until it ends
-               
-          while (rst.next()) {
-       	  
-              bookTitle = rst.getString(1);
-              issuedBooks.add(bookTitle);
-            }
-        }
-        } catch (SQLException e) {//--Catch if any sql exception occurred
-            e.printStackTrace();
-        }
-   	 
-		return issuedBooks;//---Return batches array object with a length > 0 if batches exists, if not array object returns with a length = 0
-    }
+ 
 
     //***-------------------------------------------------Getting ISBN to insert into issueBook table-------------------------------------------------------------***//
 	public static IssueBook getBookISBN(Book b1) {
@@ -219,8 +174,8 @@ public class AdminController {
 	            PreparedStatement preparedStatement = connection.prepareStatement("" +
 	                    "select ISBN,NoOFCopies " +
 	                    "from book " +
-	                    "where BookTitle=?");//---Prepare sql as a java object
-	            preparedStatement.setObject(1,b1.getBooktitle());//---Set values to sql object
+	                    "where ISBN=?");//---Prepare sql as a java object
+	            preparedStatement.setObject(1,b1.getBookISBN());//---Set values to sql object
 	            
 	            
 	         
@@ -365,15 +320,16 @@ public class AdminController {
 		}	
 	
 	//***----------------------------------------------------------Check the registration number is avilable--------------------------------------------------------------------***//
-	public static boolean checkUser(String userId) {
+	public static boolean checkUser(User u1) {
 		
 		try {
 			Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
 	        PreparedStatement preparedStatement = connection.prepareStatement("select count(ClientId) " + 
-	        		"from issuebook "+ 
+	        		"from client "+ 
 	        		"where ClientId = ?"
 	        		);
-	        preparedStatement.setObject(1, userId);
+	       
+	        preparedStatement.setObject(1, u1.getUserId());
 	        ResultSet rst = preparedStatement.executeQuery();
 	        
 	        
@@ -444,44 +400,6 @@ public class AdminController {
 		}
 	}
 	
-public static Book checkISBN(Book bk) {
-		
-		try {
-			Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
-	        PreparedStatement preparedStatement = connection.prepareStatement("select ISBN,BookTitle,Author,BookType,NoOFCopies " + 
-	        		"from book "+ 
-	        		"where ISBN = ?"
-	        		);
-	        preparedStatement.setObject(1,bk.getBookISBN());
-	        ResultSet rst = preparedStatement.executeQuery();
-	        
-	        
-	        if(rst.next()) {
-	        	System.out.println(123);
-	        	System.out.println(rst.getString(1).equals(""));
-	        	
-	        	if(!rst.getString(1).isEmpty()) {
-	        	bk.setBooktitle(rst.getString(2));
-	        	bk.setAuthor(rst.getString(3));
-	        	bk.setBookType(rst.getString(4));
-	        	bk.setNoOfCopies(rst.getInt(5));
-	        	
-	        	return bk;
-	        }
-	        	else {
-	        		System.out.println(456);
-	        		return null;}
-	        	}   	
-	    }catch(SQLException e) {//--Catch if any sql exception occurred
-	        e.printStackTrace();
-			
-		}
-		
-		return null;
-	}
-
-
-
 public static boolean ckISBN(Book bk) {
 	
 	try {
@@ -533,18 +451,97 @@ public static boolean ckISBN(Book bk) {
 	        e.printStackTrace();
 			
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
+		
+		
+		public static int numberOFpages(String booktype) {
+			
+			int noOfPages = 0;
+			try {
+				Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
+		        PreparedStatement preparedStatement = connection.prepareStatement("select count(ISBN) "
+		        	+"from book "
+		        	+"where BookType =?"
+		        		);
+		        preparedStatement.setObject(1, booktype);
+		       
+		        ResultSet rst = preparedStatement.executeQuery();
+		       
+		        if(rst.next()) {
+		        noOfPages=rst.getInt(1);
+		        }
+				
+				
+			}catch(SQLException e) {//--Catch if any sql exception occurred
+		        e.printStackTrace();
+				
+			}
+			
+			
+			return noOfPages;
+			
+			
+		}
+		
+		
+		
+//		public static ArrayList<String[]> getBookDetails(int index,String bookType){
+//			ArrayList <String[]> books = new ArrayList<>();
+//	    	
+//	    	 try {
+//	             Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
+//	             PreparedStatement preparedStatement = connection.prepareStatement
+//	            ("select ISBN,BookTitle,Author,BookType,NumberOFCopies "+
+//	             "from client "
+//	            +"WHERE BookType = '?' "
+//	             +"LIMIT ?,2;");//---Prepare sql as a java object
+//	             
+//	             
+//	             preparedStatement.setObject(1, bookType);
+//	             preparedStatement.setObject(2, index);
+//	             ResultSet rst = preparedStatement.executeQuery();//---Execute sql and store result
+//	             {//---Navigate pointer to result rows until it ends
+//	                
+//	           while (rst.next()) {
+//	        	   String [] bookInf= new String[5];
+//	               bookInf[0] = rst.getString(1);
+//	               bookInf[1] = rst.getString(2);
+//	               bookInf[2] = rst.getString(3);
+//	               bookInf[3] = rst.getString(4);
+//	               bookInf[4] = rst.getString(5);
+//	               
+//	               books.add(bookInf);
+//	            	 }
+//	            	 
+//	                 
+//	                 
+//	             }
+//	         } catch (SQLException e) {//--Catch if any sql exception occurred
+//	             e.printStackTrace();
+//	         }
+//	    	 
+//			return users;//---Return batches array object with a length > 0 if batches exists, if not array object retu
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		}
+		
+		
 	
-}
+	
+
 
 
 

@@ -213,9 +213,9 @@ public class AddBook extends JFrame {
 				Book bk = new Book();
 				bk.setBookISBN(ISBN);
 				
-				//AdminController.checkISBN(bk);
+				
 				Boolean c = AdminController.ckISBN(bk);
-				System.out.println(bk);
+			
 				
 				if(c == true) {
 					JOptionPane.showMessageDialog(null, "This book is available.Update the quantity");
@@ -230,6 +230,7 @@ public class AddBook extends JFrame {
 					noOfCopies.setText(Integer.toString(bk.getNoOfCopies()));
 					noOfCopies.setEnabled(false);
 					noOfCopies.setDisabledTextColor(Color.BLACK);
+					coppies.setEnabled(true);
 					
 					
 				}else {
@@ -262,6 +263,22 @@ public class AddBook extends JFrame {
 				Book bk = new Book(ISBN,bookTitle,bookType,authorname,totalCoppies);
 				
 				AdminController.updatebook2(bk);
+				JOptionPane.showMessageDialog(null, "Book Details Suscessfully Updated");
+				txtIsbn.setText(null);
+				txtBookTitle.setText(null);
+				author.setText(null);
+				noOfCopies.setText(null);
+				coppies.setText("0");
+				
+				txtIsbn.setEnabled(true);
+				txtBookType.setEnabled(true);
+				noOfCopies.setEnabled(true);
+				
+				coppies.setEnabled(false);
+				coppies.setDisabledTextColor(Color.black);
+				
+				
+				
 				
 				
 				

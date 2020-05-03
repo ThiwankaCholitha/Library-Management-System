@@ -133,7 +133,7 @@ public class UserView extends JFrame {
 		button.setForeground(Color.WHITE);
 		button.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		button.setBackground(SystemColor.textHighlight);
-		button.setBounds(505, 513, 126, 33);
+		button.setBounds(469, 547, 126, 33);
 		contentPane.add(button);
 		
 		Button button_1 = new Button("Get Details");
@@ -144,19 +144,20 @@ public class UserView extends JFrame {
 				
 				String userId = textField.getText();
 				User userdetails = new User();
+				
 				userdetails.setUserId(userId);
 				
-				boolean c = AdminController.checkUser(userId);
+				boolean c = AdminController.checkUser(userdetails);
+			
 				
-				if(c) {
+				if(c){
 				userdetails = AdminController.getUserDetails(userdetails);
 				
 				textField_1.setText(userdetails.getUserName());
+				textField.setEnabled(false);
+				textField.setDisabledTextColor(Color.black);
 				textField_2.setText(userdetails.getUserEmail());
 				textField_3.setText(userdetails.getMobilenumber());
-				
-				
-				
 				}
 				
 				else {
@@ -169,7 +170,7 @@ public class UserView extends JFrame {
 		button_1.setForeground(Color.WHITE);
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		button_1.setBackground(SystemColor.textHighlight);
-		button_1.setBounds(112, 513, 126, 33);
+		button_1.setBounds(123, 484, 126, 33);
 		contentPane.add(button_1);
 		
 		Panel panel_3 = new Panel();
@@ -196,9 +197,11 @@ public class UserView extends JFrame {
 				JOptionPane.showMessageDialog(null, "User Details Sucessfully Updated");
 				
 				textField.setText(null);
+				textField.setEnabled(true);
 				textField_1.setText(null);
 				textField_2.setText(null);
 				textField_3.setText(null);
+				
 			
 				
 			}
@@ -206,7 +209,18 @@ public class UserView extends JFrame {
 		button_2.setForeground(Color.WHITE);
 		button_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		button_2.setBackground(SystemColor.textHighlight);
-		button_2.setBounds(311, 513, 126, 33);
+		button_2.setBounds(123, 547, 126, 33);
 		contentPane.add(button_2);
+		
+		Button button_3 = new Button("Delete User");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		button_3.setForeground(Color.WHITE);
+		button_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		button_3.setBackground(SystemColor.textHighlight);
+		button_3.setBounds(469, 484, 126, 33);
+		contentPane.add(button_3);
 	}
 }
