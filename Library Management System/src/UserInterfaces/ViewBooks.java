@@ -122,12 +122,16 @@ public class ViewBooks extends JFrame {
 //				}
 //				
 			 n1 = n1/2;
-				 System.out.println(n1);
+			 System.out.println(n1);
 				for(int i=1; i<=n1;i++){
 					
 					comboBox.addItem(n1);
-			}
+			 
+				
+			
+			
 		}
+			}
 		});
 		
 		comboBox.setForeground(Color.BLACK);
