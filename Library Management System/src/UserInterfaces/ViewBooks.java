@@ -19,6 +19,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import java.awt.Font;
+
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -30,7 +32,7 @@ import java.awt.event.ItemEvent;
 
 public class ViewBooks extends JFrame {
 	String type = null;
-	String number = null;
+	int number;
 	
 	private JPanel contentPane;
 	private JTable table;
@@ -92,6 +94,9 @@ public class ViewBooks extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		scrollPane.setOpaque(false);
+		scrollPane.getViewport().setOpaque(false);
+		scrollPane.setBorder(BorderFactory.createEmptyBorder());
 		//Setting the scrollpane to the table.
 				scrollPane.setViewportView(table);
 				
@@ -114,6 +119,12 @@ public class ViewBooks extends JFrame {
 				 dtm.setColumnIdentifiers(header);
 				    table.setModel(dtm);
 				    table.setEnabled(false);
+				    table.getColumnModel().getColumn(0).setPreferredWidth(120);
+				    table.getColumnModel().getColumn(1).setPreferredWidth(200);
+				    table.getColumnModel().getColumn(2).setPreferredWidth(120);
+				    table.getColumnModel().getColumn(3).setPreferredWidth(50);
+				    table.getColumnModel().getColumn(4).setPreferredWidth(100);
+				  
 				    
 		
 		JLabel label = new JLabel("BOOK TYPE :");
@@ -146,6 +157,19 @@ public class ViewBooks extends JFrame {
 		contentPane.add(lblPage);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				
+				if(e.getStateChange() == e.SELECTED) {
+					number = (int) e.getItem();
+					System.out.println(number);
+					addDataToTable(type,number,dtm);
+					
+				}
+			}
+		});
+	
+
 	
 		
 		
@@ -154,9 +178,9 @@ public class ViewBooks extends JFrame {
 			public void itemStateChanged(ItemEvent e) {
 				
 				if(e.getStateChange() == e.SELECTED) {
-					type = (String) e.getItem();
+					type = e.getItem().toString();
 					test(comboBox,type);
-					number = (String) e.getItem();
+					
 					addDataToTable(type,number,dtm);
 				}
 				
@@ -180,6 +204,7 @@ public class ViewBooks extends JFrame {
 
 	private void test(JComboBox cb, String type) {
 	System.out.println(type);
+	
 	cb.removeAllItems();
 		int n1 = AdminController.numberOFpages(type);
 		
@@ -201,15 +226,15 @@ public class ViewBooks extends JFrame {
 	
 	}
 	
-	private void addDataToTable(String type,String number, DefaultTableModel dt) {
+	private void addDataToTable(String type,int number, DefaultTableModel dt) {
 		ArrayList<String[]> books = null;
-		 number= "1";
+		 number= 1;
 		
 	
 		int num;
 		
-			 num =(Integer.parseInt(number)-1)*2;
-			System.out.println(num);
+			 num =(number-1)*2;
+			//System.out.println(num);
 			
 			//Calling the method
 			    books = AdminController.getBookDetails(num, type);
@@ -220,20 +245,6 @@ public class ViewBooks extends JFrame {
 			    	dt.addRow(books.get(r));
 			    }
 
-			
-			
-			
-			
-			
-		
-		
-		
-		
-		
-	}
-
-
-
-
+			}
 }
 

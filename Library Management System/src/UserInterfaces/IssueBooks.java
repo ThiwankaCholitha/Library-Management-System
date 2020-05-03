@@ -190,7 +190,15 @@ public class IssueBooks extends JFrame {
 				
 				User u1 = new User();
 				u1.setUserId("IT19206806");
-				//AdminController.chkUserHasBook(u1)
+				boolean c;
+				c = AdminController.chkUserHasBook(u1);
+				if(c) {
+					JOptionPane.showMessageDialog(null, "User cannot take a Book.Please Return the book");
+					textField.setText(null);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "User can take a Book.");
+				}
 				
 			}
 		});
