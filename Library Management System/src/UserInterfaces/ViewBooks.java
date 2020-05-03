@@ -23,6 +23,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class ViewBooks extends JFrame {
 	String type = null;
@@ -96,6 +98,7 @@ public class ViewBooks extends JFrame {
 		
 		JComboBox comboBox_1 = new JComboBox();
 		
+		
 		comboBox_1.setForeground(Color.BLACK);
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboBox_1.setEditable(true);
@@ -108,13 +111,6 @@ public class ViewBooks extends JFrame {
 		comboBox_1.addItem("B.S");
 		comboBox_1.addItem("E.N");
 		
-		comboBox_1.addPropertyChangeListener(new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent evt) {
-				type = comboBox_1.getSelectedItem().toString();
-				test(comboBox_1,type);
-				
-			}
-		});
 		
 	
 		
@@ -124,10 +120,29 @@ public class ViewBooks extends JFrame {
 		contentPane.add(lblPage);
 		
 		JComboBox comboBox = new JComboBox();
-		comboBox.addPropertyChangeListener(new PropertyChangeListener() {
+		
+		
+		comboBox_1.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				}
+				
+				type = comboBox_1.getSelectedItem().toString();
+				test(comboBox,type);
+				;
+				
+			}
 		});
+		
+		
+		comboBox_1.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange() == e.SELECTED) {
+				System.out.println(e.getItem());
+				}
+				type = comboBox_1.getSelectedItem().toString();
+				test(comboBox,type);
+			}
+		});
+		
 		
 		comboBox.setForeground(Color.BLACK);
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -137,22 +152,14 @@ public class ViewBooks extends JFrame {
 		contentPane.add(comboBox);
 		
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-		}
-			
-	});
-		btnNewButton.setBounds(216, 123, 97, 25);
-		contentPane.add(btnNewButton);
-		
-		test(comboBox,type);
-		comboBox_1.removeAllItems();
+	
+	test(comboBox,type);
 	}
 	
 
 private void test(JComboBox cb, String type) {
-	
+	//System.out.println();
+	cb.removeAllItems();
 		int n1 = AdminController.numberOFpages(type);
 		
 		
@@ -164,7 +171,7 @@ private void test(JComboBox cb, String type) {
 		
 		
 	 n1 = n1/2;
-	 System.out.println(n1);
+	 //System.out.println(n1);
 		for(int i=1; i<=n1;i++){
 			
 			cb.addItem(i);
