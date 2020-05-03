@@ -190,7 +190,7 @@ public class IssueBooks extends JFrame {
 				
 				User u1 = new User();
 				u1.setUserId("IT19206806");
-				AdminController.chkUserHasBook(u1)
+				//AdminController.chkUserHasBook(u1)
 				
 			}
 		});

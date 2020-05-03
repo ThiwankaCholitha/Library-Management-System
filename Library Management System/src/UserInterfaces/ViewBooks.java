@@ -25,7 +25,8 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 
 public class ViewBooks extends JFrame {
-
+	String type = null;
+	String number = null;
 	private JPanel contentPane;
 	private JTable table;
 
@@ -92,7 +93,7 @@ public class ViewBooks extends JFrame {
 		label.setBounds(24, 83, 95, 16);
 		contentPane.add(label);
 		
-		String type = null;
+		
 		JComboBox comboBox_1 = new JComboBox();
 		
 		comboBox_1.setForeground(Color.BLACK);
@@ -103,16 +104,19 @@ public class ViewBooks extends JFrame {
 		contentPane.add(comboBox_1);
 		
 		comboBox_1.addItem("I.T");
+		type = "I.T";
 		comboBox_1.addItem("B.S");
 		comboBox_1.addItem("E.N");
 		
 		comboBox_1.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				String type = comboBox_1.getSelectedItem().toString();
+				type = comboBox_1.getSelectedItem().toString();
+				test(comboBox_1,type);
+				
 			}
 		});
 		
-		//String type = comboBox_1.getSelectedItem().toString();
+	
 		
 		JLabel lblPage = new JLabel("PAGE :");
 		lblPage.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -142,10 +146,11 @@ public class ViewBooks extends JFrame {
 		btnNewButton.setBounds(216, 123, 97, 25);
 		contentPane.add(btnNewButton);
 		
-		test(comboBox,type);	
+		test(comboBox,type);
+		comboBox_1.removeAllItems();
 	}
 	
-	
+
 private void test(JComboBox cb, String type) {
 	
 		int n1 = AdminController.numberOFpages(type);
