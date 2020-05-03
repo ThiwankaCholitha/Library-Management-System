@@ -122,21 +122,12 @@ public class ViewBooks extends JFrame {
 		JComboBox comboBox = new JComboBox();
 		
 		
-		comboBox_1.addPropertyChangeListener(new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent evt) {
-				
-				type = comboBox_1.getSelectedItem().toString();
-				test(comboBox,type);
-				;
-				
-			}
-		});
-		
 		
 		comboBox_1.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange() == e.SELECTED) {
-				System.out.println(e.getItem());
+					type = (String) e.getItem();
+					test(comboBox,type);
 				}
 				type = comboBox_1.getSelectedItem().toString();
 				test(comboBox,type);
@@ -153,12 +144,12 @@ public class ViewBooks extends JFrame {
 		
 		
 	
-	test(comboBox,type);
+	 test(comboBox,type);
 	}
 	
 
 private void test(JComboBox cb, String type) {
-	//System.out.println();
+	System.out.println(type);
 	cb.removeAllItems();
 		int n1 = AdminController.numberOFpages(type);
 		
