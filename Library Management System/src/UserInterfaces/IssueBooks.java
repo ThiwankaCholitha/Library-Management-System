@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 
 import Classes.Book;
 import Classes.IssueBook;
+import Classes.User;
 import Controller.AdminController;
 import java.awt.Button;
 import java.awt.SystemColor;
@@ -182,6 +183,22 @@ public class IssueBooks extends JFrame {
 		textField_1.setColumns(10);
 		textField_1.setBounds(255, 205, 300, 33);
 		contentPane.add(textField_1);
+		
+		Button button_2 = new Button("Check");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				User u1 = new User();
+				u1.setUserId("IT19206806");
+				AdminController.chkUserHasBook(u1)
+				
+			}
+		});
+		button_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		button_2.setBackground(new Color(0, 0, 128));
+		button_2.setForeground(Color.WHITE);
+		button_2.setBounds(575, 126, 79, 31);
+		contentPane.add(button_2);
 		
 		ArrayList <String> issuedBooks = new ArrayList<>();
 		String bookTitle;

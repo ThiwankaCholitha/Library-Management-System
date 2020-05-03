@@ -92,13 +92,27 @@ public class ViewBooks extends JFrame {
 		label.setBounds(24, 83, 95, 16);
 		contentPane.add(label);
 		
+		String type = null;
 		JComboBox comboBox_1 = new JComboBox();
+		
 		comboBox_1.setForeground(Color.BLACK);
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboBox_1.setEditable(true);
 		comboBox_1.setBackground(Color.WHITE);
 		comboBox_1.setBounds(130, 77, 119, 33);
 		contentPane.add(comboBox_1);
+		
+		comboBox_1.addItem("I.T");
+		comboBox_1.addItem("B.S");
+		comboBox_1.addItem("E.N");
+		
+		comboBox_1.addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent evt) {
+				String type = comboBox_1.getSelectedItem().toString();
+			}
+		});
+		
+		//String type = comboBox_1.getSelectedItem().toString();
 		
 		JLabel lblPage = new JLabel("PAGE :");
 		lblPage.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -108,30 +122,7 @@ public class ViewBooks extends JFrame {
 		JComboBox comboBox = new JComboBox();
 		comboBox.addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent evt) {
-				
-				int n1 = AdminController.numberOFpages("I.T");
-				//System.out.println(n1);
-				
-				if((n1%2) == 1) {
-					n1+=1;
 				}
-				
-//				System.out.println(n1);
-//				for(int i=1; i<=n1/2; i++) {
-//					comboBox.addItem(i);
-//				}
-//				
-			 n1 = n1/2;
-			 System.out.println(n1);
-				for(int i=1; i<=n1;i++){
-					
-					comboBox.addItem(n1);
-			 
-				
-			
-			
-		}
-			}
 		});
 		
 		comboBox.setForeground(Color.BLACK);
@@ -141,38 +132,40 @@ public class ViewBooks extends JFrame {
 		comboBox.setBounds(591, 77, 119, 33);
 		contentPane.add(comboBox);
 		
+		
 		JButton btnNewButton = new JButton("New button");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
-//				int n1 = AdminController.numberOFpages("I.T");
-//				System.out.println(n1);
-//				
-//				if((n1%2) == 1) {
-//					n1+=1;
-//				}
-//				
-//				System.out.println(n1);
-//				for(int i=1; i<=n1/2; i++) {
-//					comboBox.addItem(i);
-//				}
-//				
-//				 n1 = n1/2;
-//				 System.out.println(n1);
-//				for(int i=1; i<=n1;i++){
-//			System.out.println((i-1)*2);
 		}
 			
-			
-			
-			
-			
-			
-			
-			
-			
-		});
+	});
 		btnNewButton.setBounds(216, 123, 97, 25);
 		contentPane.add(btnNewButton);
+		
+		test(comboBox,type);	
 	}
+	
+	
+private void test(JComboBox cb, String type) {
+	
+		int n1 = AdminController.numberOFpages(type);
+		
+		
+		if((n1%2) == 1) {
+			n1+=1;
+		}
+		
+		
+		
+		
+	 n1 = n1/2;
+	 System.out.println(n1);
+		for(int i=1; i<=n1;i++){
+			
+			cb.addItem(i);
+	}
+	
+	}
+
 }
+

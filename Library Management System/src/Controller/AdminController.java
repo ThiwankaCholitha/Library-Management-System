@@ -483,6 +483,30 @@ public static boolean ckISBN(Book bk) {
 			
 		}
 		
+		public static boolean chkUserHasBook(User u1) {
+			
+			try {
+				Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
+		        PreparedStatement preparedStatement = connection.prepareStatement("select Issued " + 
+		        		"from issuebook "+ 
+		        		"where ClientId = ?"
+		        		);
+		        preparedStatement.setObject(1,u1.getUserId());
+		        ResultSet rst = preparedStatement.executeQuery();
+		        
+		        
+		        if(rst.next()) {
+		        	
+		        	return true;
+		        }}catch(SQLException e) {//--Catch if any sql exception occurred
+		        e.printStackTrace();
+				
+			}
+			return false;	
+			}
+
+		
+		
 		
 		
 //		public static ArrayList<String[]> getBookDetails(int index,String bookType){
