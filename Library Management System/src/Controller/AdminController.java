@@ -509,58 +509,45 @@ public static boolean ckISBN(Book bk) {
 		
 		
 		
-//		public static ArrayList<String[]> getBookDetails(int index,String bookType){
-//			ArrayList <String[]> books = new ArrayList<>();
-//	    	
-//	    	 try {
-//	             Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
-//	             PreparedStatement preparedStatement = connection.prepareStatement
-//	            ("select ISBN,BookTitle,Author,BookType,NumberOFCopies "+
-//	             "from client "
-//	            +"WHERE BookType = '?' "
-//	             +"LIMIT ?,2;");//---Prepare sql as a java object
-//	             
-//	             
-//	             preparedStatement.setObject(1, bookType);
-//	             preparedStatement.setObject(2, index);
-//	             ResultSet rst = preparedStatement.executeQuery();//---Execute sql and store result
-//	             {//---Navigate pointer to result rows until it ends
-//	                
-//	           while (rst.next()) {
-//	        	   String [] bookInf= new String[5];
-//	               bookInf[0] = rst.getString(1);
-//	               bookInf[1] = rst.getString(2);
-//	               bookInf[2] = rst.getString(3);
-//	               bookInf[3] = rst.getString(4);
-//	               bookInf[4] = rst.getString(5);
-//	               
-//	               books.add(bookInf);
-//	            	 }
-//	            	 
-//	                 
-//	                 
-//	             }
-//	         } catch (SQLException e) {//--Catch if any sql exception occurred
-//	             e.printStackTrace();
-//	         }
-//	    	 
-//			return users;//---Return batches array object with a length > 0 if batches exists, if not array object retu
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+		public static ArrayList<String[]> getBookDetails(int index,String bookType){
+			ArrayList <String[]> books = new ArrayList<>();
+	    	
+			try {
+	             Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
+	             PreparedStatement preparedStatement = connection.prepareStatement
+	            ("select ISBN,BookTitle,Author,BookType,NoOFCopies "+
+	             "from book "
+	            +"WHERE BookType = ? "
+	            +"LIMIT ?,2;");//---Prepare sql as a java object
+	             
+	             
+	             preparedStatement.setObject(1, bookType);
+	             preparedStatement.setObject(2, index);
+	             ResultSet rst = preparedStatement.executeQuery();//---Execute sql and store result
+	             {//---Navigate pointer to result rows until it ends
+	                
+	           while (rst.next()) {
+	        	   String [] bookInf= new String[5];
+	               bookInf[0] = rst.getString(1);
+	               bookInf[1] = rst.getString(2);
+	               bookInf[2] = rst.getString(3);
+	               bookInf[3] = rst.getString(4);
+	               bookInf[4] = rst.getString(5);
+	               
+	               books.add(bookInf);
+	            	 }
+	            	 
+	                 
+	                 
+	             }
+	         } catch (SQLException e) {//--Catch if any sql exception occurred
+	             e.printStackTrace();
+	         }
+	    	 
+			return books;//---Return batches array object with a length > 0 if batches exists, if not array object retu
+			}
 		}
+
 		
 		
 	

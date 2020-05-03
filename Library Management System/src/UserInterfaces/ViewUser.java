@@ -125,7 +125,7 @@ public class ViewUser extends JFrame {
 		
 		//Creating the default table model to put data.
 		 DefaultTableModel dtm = new DefaultTableModel(0, 0);
-	
+		
 
 		// adding header of the table
 		String header[] = new String[] { "UserId", "User Name", "Email",
@@ -134,6 +134,7 @@ public class ViewUser extends JFrame {
 		// add header to the table model     
 		 dtm.setColumnIdentifiers(header);
 		    table.setModel(dtm);
+		    
 		    table.setEnabled(false);
 		    
 		 //Setting the colums accoring to the neeeded size.

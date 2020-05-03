@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import Controller.AdminController;
 import javafx.scene.control.ComboBox;
@@ -22,6 +23,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 import java.beans.PropertyChangeEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
@@ -29,6 +31,7 @@ import java.awt.event.ItemEvent;
 public class ViewBooks extends JFrame {
 	String type = null;
 	String number = null;
+	
 	private JPanel contentPane;
 	private JTable table;
 
@@ -89,6 +92,29 @@ public class ViewBooks extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		//Setting the scrollpane to the table.
+				scrollPane.setViewportView(table);
+				
+				//Setting the table properties.
+				table.getTableHeader().setResizingAllowed(false);
+				table.getTableHeader().setReorderingAllowed(false);
+				table.setBackground(Color.white);
+				table.getTableHeader().setBackground(Color.white);
+				table.getTableHeader().setBackground(Color.decode("#87cefa"));
+				
+				
+				//Creating the default table model to put data.
+				 DefaultTableModel dtm = new DefaultTableModel(0, 0);
+			
+
+				// adding header of the table
+				String header[] = new String[] { "ISBN", "Book Title","Author", "Book Type","No Of Coppies"};
+			
+				// add header to the table model     
+				 dtm.setColumnIdentifiers(header);
+				    table.setModel(dtm);
+				    table.setEnabled(false);
+				    
 		
 		JLabel label = new JLabel("BOOK TYPE :");
 		label.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -120,17 +146,20 @@ public class ViewBooks extends JFrame {
 		contentPane.add(lblPage);
 		
 		JComboBox comboBox = new JComboBox();
+	
 		
 		
 		
 		comboBox_1.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
+				
 				if(e.getStateChange() == e.SELECTED) {
 					type = (String) e.getItem();
 					test(comboBox,type);
+					number = (String) e.getItem();
+					addDataToTable(type,number,dtm);
 				}
-				type = comboBox_1.getSelectedItem().toString();
-				test(comboBox,type);
+				
 			}
 		});
 		
@@ -145,10 +174,11 @@ public class ViewBooks extends JFrame {
 		
 	
 	 test(comboBox,type);
+	 addDataToTable(type,number,dtm);
 	}
 	
 
-private void test(JComboBox cb, String type) {
+	private void test(JComboBox cb, String type) {
 	System.out.println(type);
 	cb.removeAllItems();
 		int n1 = AdminController.numberOFpages(type);
@@ -167,8 +197,43 @@ private void test(JComboBox cb, String type) {
 			
 			cb.addItem(i);
 	}
+		//number eka add krgnna
 	
 	}
+	
+	private void addDataToTable(String type,String number, DefaultTableModel dt) {
+		ArrayList<String[]> books = null;
+		 number= "1";
+		
+	
+		int num;
+		
+			 num =(Integer.parseInt(number)-1)*2;
+			System.out.println(num);
+			
+			//Calling the method
+			    books = AdminController.getBookDetails(num, type);
+			    dt.setRowCount(0);
+			    //iterating via a loop to get the last data row of the data table.
+			    for(int r=0; r<books.size(); r++) {
+			    	
+			    	dt.addRow(books.get(r));
+			    }
+
+			
+			
+			
+			
+			
+		
+		
+		
+		
+		
+	}
+
+
+
 
 }
 
