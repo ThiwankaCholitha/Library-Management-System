@@ -113,7 +113,7 @@ public class ViewBooks extends JFrame {
 			
 
 				// adding header of the table
-				String header[] = new String[] { "ISBN", "Book Title","Author", "Book Type","No Of Coppies"};
+				String header[] = new String[] { "ISBN", "Book Title","Author", "Book Type","No Of Coppies","All Books"};
 			
 				// add header to the table model     
 				 dtm.setColumnIdentifiers(header);
@@ -122,7 +122,7 @@ public class ViewBooks extends JFrame {
 				    table.getColumnModel().getColumn(0).setPreferredWidth(120);
 				    table.getColumnModel().getColumn(1).setPreferredWidth(200);
 				    table.getColumnModel().getColumn(2).setPreferredWidth(120);
-				    table.getColumnModel().getColumn(3).setPreferredWidth(50);
+				    table.getColumnModel().getColumn(3).setPreferredWidth(70);
 				    table.getColumnModel().getColumn(4).setPreferredWidth(100);
 				  
 				    
@@ -161,6 +161,7 @@ public class ViewBooks extends JFrame {
 			public void itemStateChanged(ItemEvent e) {
 				
 				if(e.getStateChange() == e.SELECTED) {
+					
 					number = (int) e.getItem();
 					System.out.println(number);
 					addDataToTable(type,number,dtm);
@@ -209,7 +210,7 @@ public class ViewBooks extends JFrame {
 		int n1 = AdminController.numberOFpages(type);
 		
 		
-		if((n1%2) == 1) {
+		if((n1%3) > 0) {
 			n1+=1;
 		}
 		
@@ -227,13 +228,14 @@ public class ViewBooks extends JFrame {
 	}
 	
 	private void addDataToTable(String type,int number, DefaultTableModel dt) {
+		
 		ArrayList<String[]> books = null;
-		 number= 1;
+		
 		
 	
 		int num;
 		
-			 num =(number-1)*2;
+			 num =(number-1)*3;
 			//System.out.println(num);
 			
 			//Calling the method

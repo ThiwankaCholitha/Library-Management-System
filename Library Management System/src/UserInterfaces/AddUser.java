@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Classes.User;
+import Classes.Validations;
 import Controller.AdminController;
 import javafx.scene.control.ComboBox;
 
@@ -33,6 +34,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import java.awt.Window.Type;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class AddUser extends JFrame {
 
@@ -96,12 +99,24 @@ public class AddUser extends JFrame {
 		contentPane.add(panel_3);
 		
 		textUid = new JTextField();
+		textUid.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				Validations.nicValidation(textUid);
+			}
+		});
 		textUid.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textUid.setBounds(261, 75, 300, 33);
 		contentPane.add(textUid);
 		textUid.setColumns(10);
 		
 		textUname = new JTextField();
+		textUname.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				Validations.validateName(textUname);
+			}
+		});
 		textUname.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textUname.setColumns(10);
 		textUname.setBounds(262, 156, 300, 33);
@@ -116,12 +131,24 @@ public class AddUser extends JFrame {
 		contentPane.add(separator_1);
 		
 		textPhone = new JTextField();
+		textPhone.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				Validations.phoneValidation(textPhone);
+			}
+		});
 		textPhone.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textPhone.setColumns(10);
 		textPhone.setBounds(261, 318, 300, 33);
 		contentPane.add(textPhone);
 		
 		textEmail = new JTextField();
+		textEmail.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				Validations.emailValidate(textEmail);
+			}
+		});
 		textEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textEmail.setColumns(10);
 		textEmail.setBounds(261, 231, 300, 33);

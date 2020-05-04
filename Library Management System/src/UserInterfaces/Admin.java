@@ -68,52 +68,6 @@ public class Admin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		Button button = new Button("Add User");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				AddUser newuser = new AddUser();
-				newuser.setLocationRelativeTo(null);
-				newuser.setVisible(true);
-			
-				dispose();
-			}
-		});
-		button.setFont(new Font("Tahoma", Font.BOLD, 16));
-		button.setBackground(SystemColor.textHighlight);
-		button.setBounds(119, 193, 180, 40);
-		contentPane.add(button);
-		
-		Button button_1 = new Button("View / Update Users");
-		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				UserView viewuser = new UserView();
-				viewuser.setVisible(true);
-				viewuser.setLocationRelativeTo(null);
-				dispose();
-				
-				
-				}
-		});
-		button_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		button_1.setBackground(SystemColor.textHighlight);
-		button_1.setBounds(437, 193, 180, 40);
-		contentPane.add(button_1);
-		
-		Button button_2 = new Button("Add Books");
-		button_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				AddBook addbook = new AddBook();
-				addbook.setLocationRelativeTo(null);
-				addbook.setVisible(true);
-				dispose();
-			}
-		});
-		button_2.setFont(new Font("Tahoma", Font.BOLD, 16));
-		button_2.setBackground(SystemColor.textHighlight);
-		button_2.setBounds(119, 271, 180, 40);
-		contentPane.add(button_2);
-		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(161, 214, 1, 2);
 		contentPane.add(separator);
@@ -122,12 +76,6 @@ public class Admin extends JFrame {
 		separator_1.setBounds(554, 231, 1, 2);
 		contentPane.add(separator_1);
 		
-		Button button_3 = new Button("View Books");
-		button_3.setFont(new Font("Tahoma", Font.BOLD, 16));
-		button_3.setBackground(SystemColor.textHighlight);
-		button_3.setBounds(437, 271, 180, 40);
-		contentPane.add(button_3);
-		
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setBounds(512, 309, 1, 2);
 		contentPane.add(separator_2);
@@ -135,43 +83,6 @@ public class Admin extends JFrame {
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setBounds(176, 326, 1, 2);
 		contentPane.add(separator_3);
-		
-		Button button_4 = new Button("Issue Books");
-		button_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				IssueBooks issuebook = new IssueBooks();
-				issuebook.setLocationRelativeTo(null);
-				issuebook.setVisible(true);
-				issuebook.setResizable(false);
-				dispose();
-				
-			}
-		});
-		button_4.setFont(new Font("Tahoma", Font.BOLD, 16));
-		button_4.setBackground(SystemColor.textHighlight);
-		button_4.setBounds(119, 354, 180, 40);
-		contentPane.add(button_4);
-		
-		Button button_5 = new Button("View Issued Books");
-		button_5.setFont(new Font("Tahoma", Font.BOLD, 16));
-		button_5.setBackground(SystemColor.textHighlight);
-		button_5.setBounds(437, 354, 180, 40);
-		contentPane.add(button_5);
-		
-		Button button_6 = new Button("Return Books");
-		button_6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ReturnBook returnbook = new ReturnBook();
-				returnbook.setLocationRelativeTo(null);
-				returnbook.setVisible(true);
-				dispose();
-			}
-		});
-		button_6.setFont(new Font("Tahoma", Font.BOLD, 16));
-		button_6.setBackground(SystemColor.textHighlight);
-		button_6.setBounds(119, 438, 180, 40);
-		contentPane.add(button_6);
 		
 		JSeparator separator_4 = new JSeparator();
 		separator_4.setBounds(192, 392, 1, 2);
@@ -228,15 +139,15 @@ public class Admin extends JFrame {
 		panel_4.setLayout(null);
 		
 		Button button_8 = new Button("Add Admin");
+		button_8.setBounds(437, 199, 180, 40);
 		button_8.setForeground(Color.WHITE);
-		button_8.setBounds(438, 248, 180, 40);
 		panel_4.add(button_8);
 		button_8.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button_8.setBackground(SystemColor.textHighlight);
 		
 		Button button_9 = new Button("Log Out");
+		button_9.setBounds(437, 286, 180, 40);
 		button_9.setForeground(Color.WHITE);
-		button_9.setBounds(282, 333, 180, 40);
 		panel_4.add(button_9);
 		button_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -251,6 +162,95 @@ public class Admin extends JFrame {
 		});
 		button_9.setFont(new Font("Tahoma", Font.BOLD, 16));
 		button_9.setBackground(SystemColor.textHighlight);
+		
+		Button button_6 = new Button("Return Books");
+		button_6.setForeground(Color.WHITE);
+		button_6.setBounds(118, 286, 180, 40);
+		panel_4.add(button_6);
+		button_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ReturnBook returnbook = new ReturnBook();
+				returnbook.setLocationRelativeTo(null);
+				returnbook.setVisible(true);
+				dispose();
+			}
+		});
+		button_6.setFont(new Font("Tahoma", Font.BOLD, 16));
+		button_6.setBackground(SystemColor.textHighlight);
+		
+		Button button_4 = new Button("Issue Books");
+		button_4.setForeground(Color.WHITE);
+		button_4.setBounds(118, 199, 180, 40);
+		panel_4.add(button_4);
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				IssueBooks issuebook = new IssueBooks();
+				issuebook.setLocationRelativeTo(null);
+				issuebook.setVisible(true);
+				issuebook.setResizable(false);
+				dispose();
+				
+			}
+		});
+		button_4.setFont(new Font("Tahoma", Font.BOLD, 16));
+		button_4.setBackground(SystemColor.textHighlight);
+		
+		Button button_2 = new Button("Add Books");
+		button_2.setForeground(Color.WHITE);
+		button_2.setBounds(118, 112, 180, 40);
+		panel_4.add(button_2);
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddBook addbook = new AddBook();
+				addbook.setLocationRelativeTo(null);
+				addbook.setVisible(true);
+				dispose();
+			}
+		});
+		button_2.setFont(new Font("Tahoma", Font.BOLD, 16));
+		button_2.setBackground(SystemColor.textHighlight);
+		
+		Button button_3 = new Button("View Books");
+		button_3.setForeground(Color.WHITE);
+		button_3.setBounds(437, 112, 180, 40);
+		panel_4.add(button_3);
+		button_3.setFont(new Font("Tahoma", Font.BOLD, 16));
+		button_3.setBackground(SystemColor.textHighlight);
+		
+		Button button_1 = new Button("View / Update Users");
+		button_1.setForeground(Color.WHITE);
+		button_1.setBounds(437, 30, 180, 40);
+		panel_4.add(button_1);
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserView viewuser = new UserView();
+				viewuser.setVisible(true);
+				viewuser.setLocationRelativeTo(null);
+				dispose();
+				
+				
+				}
+		});
+		button_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		button_1.setBackground(SystemColor.textHighlight);
+		
+		Button button = new Button("Add User");
+		button.setForeground(Color.WHITE);
+		button.setBounds(118, 30, 180, 40);
+		panel_4.add(button);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				AddUser newuser = new AddUser();
+				newuser.setLocationRelativeTo(null);
+				newuser.setVisible(true);
+			
+				dispose();
+			}
+		});
+		button.setFont(new Font("Tahoma", Font.BOLD, 16));
+		button.setBackground(SystemColor.textHighlight);
 		
 		JLabel label = new JLabel("");
 		label.setForeground(Color.WHITE);

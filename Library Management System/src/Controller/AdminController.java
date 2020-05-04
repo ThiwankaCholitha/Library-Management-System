@@ -90,7 +90,7 @@ public class AdminController {
     public static void addBook(Book book) {
         try {
             Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into book (ISBN,BookTitle,Author,BookType,NoOFCopies) values (?,?,?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into book (ISBN,BookTitle,Author,BookType,NoOFCopies,AllBooks) values (?,?,?,?,?,?)");
             
            
             preparedStatement.setObject(1,book.getBookISBN());//---Set values to sql object
@@ -98,6 +98,7 @@ public class AdminController {
             preparedStatement.setObject(3, book.getAuthor());
             preparedStatement.setObject(4,book.getBookType());
             preparedStatement.setObject(5,book.getNoOfCopies());
+            preparedStatement.setObject(6,book.getNoOfCopies());
             
             preparedStatement.executeUpdate(); //---Execute sql and returns whether it was executed or not
                 
@@ -106,41 +107,6 @@ public class AdminController {
         }
       
     }
-    
-    
-    //--------------------------------------------------------Getting exsisting users in to the table --------------------------------------------------
-    
-    public static ArrayList<String[]> getUserList(){
-    	ArrayList <String[]> users = new ArrayList<>();
-    	
-    	 try {
-             Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
-             PreparedStatement preparedStatement = connection.prepareStatement
-            ("select ClientId,ClientName,Email,PhoneNumber,ClientType "+
-             "from client");//---Prepare sql as a java object
-             ResultSet rst = preparedStatement.executeQuery();//---Execute sql and store result
-             {//---Navigate pointer to result rows until it ends
-                
-           while (rst.next()) {
-        	   String [] user = new String[5];
-               user[0] = rst.getString(1);
-               user[1] = rst.getString(2);
-               user[2] = rst.getString(3);
-               user[3] = rst.getString(4);
-               user[4] = rst.getString(5);
-               
-               users.add(user);
-            	 }
-            	 
-                 
-                 
-             }
-         } catch (SQLException e) {//--Catch if any sql exception occurred
-             e.printStackTrace();
-         }
-    	 
-		return users;//---Return batches array object with a length > 0 if batches exists, if not array object returns with a length = 0
-     }
     
     
     //--------------------------------------Removing a user from the database---------------------------------------
@@ -432,14 +398,15 @@ public static boolean ckISBN(Book bk) {
 		try {
 			Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
 	        PreparedStatement preparedStatement = connection.prepareStatement("update book "
-	        		+"set BookTitle = ?, Author = ?, BookType= ?, NoOFCopies = ? "
+	        		+"set BookTitle = ?, Author = ?, BookType= ?, NoOFCopies = ?,AllBooks = ? "
 	        		+"where ISBN =?"
 	        		);
 	        preparedStatement.setObject(1,bk.getBooktitle());
 	        preparedStatement.setObject(2,bk.getAuthor());
 	        preparedStatement.setObject(3,bk.getBookType());
 	        preparedStatement.setObject(4,bk.getNoOfCopies());
-	        preparedStatement.setObject(5,bk.getBookISBN());
+	        preparedStatement.setObject(5,bk.getNoOfCopies());
+	        preparedStatement.setObject(6,bk.getBookISBN());
 	        
 	        
 	        preparedStatement.executeUpdate();
@@ -515,10 +482,10 @@ public static boolean ckISBN(Book bk) {
 			try {
 	             Connection connection = DBConnection.getDBConnection().getConnection();//---Get database connection
 	             PreparedStatement preparedStatement = connection.prepareStatement
-	            ("select ISBN,BookTitle,Author,BookType,NoOFCopies "+
+	            ("select ISBN,BookTitle,Author,BookType,NoOFCopies,AllBooks "+
 	             "from book "
 	            +"WHERE BookType = ? "
-	            +"LIMIT ?,2;");//---Prepare sql as a java object
+	            +"LIMIT ?,3;");//---Prepare sql as a java object
 	             
 	             
 	             preparedStatement.setObject(1, bookType);
@@ -527,12 +494,13 @@ public static boolean ckISBN(Book bk) {
 	             {//---Navigate pointer to result rows until it ends
 	                
 	           while (rst.next()) {
-	        	   String [] bookInf= new String[5];
+	        	   String [] bookInf= new String[6];
 	               bookInf[0] = rst.getString(1);
 	               bookInf[1] = rst.getString(2);
 	               bookInf[2] = rst.getString(3);
 	               bookInf[3] = rst.getString(4);
 	               bookInf[4] = rst.getString(5);
+	               bookInf[5] = rst.getString(6);
 	               
 	               books.add(bookInf);
 	            	 }
