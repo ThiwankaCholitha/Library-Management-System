@@ -182,7 +182,7 @@ public class Admin extends JFrame {
 		button_4.setForeground(Color.WHITE);
 		button_4.setBounds(118, 199, 180, 40);
 		panel_4.add(button_4);
-		button_4.addActionListener(new ActionListener() {
+		button_4.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				
 				IssueBooks issuebook = new IssueBooks();
@@ -212,6 +212,14 @@ public class Admin extends JFrame {
 		button_2.setBackground(SystemColor.textHighlight);
 		
 		Button button_3 = new Button("View Books");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ViewBooks vb = new ViewBooks();
+				vb.setVisible(true);
+				vb.setLocationRelativeTo(null);
+				dispose();
+			}
+		});
 		button_3.setForeground(Color.WHITE);
 		button_3.setBounds(437, 112, 180, 40);
 		panel_4.add(button_3);
@@ -271,6 +279,8 @@ public class Admin extends JFrame {
 		panel.add(lblNewLabel);
 	}
 	
+
+
 	public void dateTime(JLabel l1,JLabel l2) {
 		
 		SimpleDateFormat simpledateformat1 = new SimpleDateFormat("HH:mm:ss");

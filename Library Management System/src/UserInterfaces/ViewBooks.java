@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import java.beans.PropertyChangeEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.Button;
+import java.awt.SystemColor;
 
 public class ViewBooks extends JFrame {
 	String type = null;
@@ -119,8 +121,8 @@ public class ViewBooks extends JFrame {
 				 dtm.setColumnIdentifiers(header);
 				    table.setModel(dtm);
 				    table.setEnabled(false);
-				    table.getColumnModel().getColumn(0).setPreferredWidth(120);
-				    table.getColumnModel().getColumn(1).setPreferredWidth(200);
+				    table.getColumnModel().getColumn(0).setPreferredWidth(100);
+				    table.getColumnModel().getColumn(1).setPreferredWidth(220);
 				    table.getColumnModel().getColumn(2).setPreferredWidth(120);
 				    table.getColumnModel().getColumn(3).setPreferredWidth(70);
 				    table.getColumnModel().getColumn(4).setPreferredWidth(100);
@@ -199,6 +201,20 @@ public class ViewBooks extends JFrame {
 		
 	
 	 test(comboBox,type);
+	 
+	 Button button = new Button("Back");
+	 button.addActionListener(new ActionListener() {
+	 	public void actionPerformed(ActionEvent e) {
+	 		Admin ad = new Admin();
+	 		ad.setVisible(true);
+	 		ad.setLocationRelativeTo(null);
+	 		dispose();
+	 	}
+	 });
+	 button.setFont(new Font("Tahoma", Font.PLAIN, 14));
+	 button.setBackground(SystemColor.textHighlight);
+	 button.setBounds(285, 509, 126, 33);
+	 contentPane.add(button);
 	 addDataToTable(type,number,dtm);
 	}
 	
@@ -210,14 +226,18 @@ public class ViewBooks extends JFrame {
 		int n1 = AdminController.numberOFpages(type);
 		
 		
-		if((n1%3) > 0) {
+		if((n1%5) > 0) {
+			n1=n1/5;
 			n1+=1;
+		}
+		else {
+			n1=n1/5;
 		}
 		
 		
 		
 		
-	 n1 = n1/2;
+
 	 //System.out.println(n1);
 		for(int i=1; i<=n1;i++){
 			

@@ -102,7 +102,7 @@ public class AddUser extends JFrame {
 		textUid.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				Validations.nicValidation(textUid);
+				Validations.validateUserName(textUid);
 			}
 		});
 		textUid.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -198,7 +198,7 @@ public class AddUser extends JFrame {
 				String utype = userType.getSelectedItem().toString();
 				
 				String usrIdCheck = uId.substring(0, 2);
-				System.out.println(usrIdCheck);
+				//System.out.println(usrIdCheck);
 				
 				UIManager um=new UIManager();
 				um.put("OptionPane.background",Color.white);

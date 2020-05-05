@@ -33,6 +33,8 @@ public class Login extends JFrame {
 	private JTextField txtUsername;
 	private JPasswordField txtPassword;
 
+
+
 	/**
 	 * Launch the application.
 	 */
@@ -94,7 +96,7 @@ public class Login extends JFrame {
 				um.put("Panel.background", Color.white);
 
 				UIManager.put("OptionPane.messageFont", new Font("Tahoma", Font.PLAIN, 14));
-				if (login == true) {
+				if (login == true){
 
 					Admin ad1 = new Admin();
 					dispose();

@@ -55,6 +55,7 @@ public class IssueBooks extends JFrame {
 	 * Create the frame.
 	 */
 	public IssueBooks() {
+		setTitle("Issue Books");
 		setForeground(Color.WHITE);
 		setType(Type.UTILITY);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
