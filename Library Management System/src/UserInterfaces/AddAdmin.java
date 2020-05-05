@@ -133,6 +133,7 @@ public class AddAdmin extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				UserAdmin ua = new UserAdmin();
 				
+				
 				String aID = textField.getText();
 				String aName = textField_1.getText();
 				String aEmail = textField_2.getText();
